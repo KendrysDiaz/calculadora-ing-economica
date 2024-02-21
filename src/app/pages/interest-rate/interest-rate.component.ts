@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './interest-rate.component.html',
-  styleUrl: './interest-rate.component.css'
+  styleUrl: './interest-rate.component.css',
 })
-export class InterestRateComponent {
-
-}
+export default class InterestRateComponent {}
