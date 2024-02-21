@@ -12,7 +12,7 @@ export const routes: Routes = [
           import('../app/pages/interest-rate/interest-rate.component'),
       },
       {
-        path: 'simplre-interest',
+        path: 'simple-interest',
         title: 'Interes Simple',
         loadComponent: () =>
           import('../app/pages/simple-interests/simple-interests.component'),
