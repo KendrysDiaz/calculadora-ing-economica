@@ -17,6 +17,12 @@ export interface menuItem {
 export class SidebarComponent {
   menuItems: menuItem[];
   currentColor: any;
+  activeItem = 'Home'
+any: any;
+
+  onSelected(item: string) {
+    this.activeItem = item;
+  }
 
   constructor(private router: Router) {
     this.menuItems = [

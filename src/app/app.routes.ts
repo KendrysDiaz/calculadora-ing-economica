@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'dashboard',
+    title: 'Calculadora Financiera',
     loadComponent: () => import('../app/pages/home/home.component'),
     children: [
       {
