@@ -1,10 +1,26 @@
 import { Component } from '@angular/core';
+import { RadioButtonComponent } from '../../shared/radio-button/radio-button.component';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from "../../shared/input/input.component";
 
 @Component({
-  selector: 'app-interest-rate',
-  standalone: true,
-  imports: [],
-  templateUrl: './interest-rate.component.html',
-  styleUrl: './interest-rate.component.css',
+    selector: 'app-interest-rate',
+    standalone: true,
+    templateUrl: './interest-rate.component.html',
+    styleUrl: './interest-rate.component.css',
+    imports: [RadioButtonComponent, ReactiveFormsModule, InputComponent]
 })
-export default class InterestRateComponent {}
+
+
+export default class InterestRateComponent {
+  registrationForm: FormGroup;
+
+  constructor() {
+    this.registrationForm = new FormGroup({
+      finalAmount: new FormControl(),
+      capital: new FormControl(),
+      Interest: new FormControl(),
+      Time: new FormControl(),
+    });
+  }
+}

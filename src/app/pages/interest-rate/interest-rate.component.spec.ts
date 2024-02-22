@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InterestRateComponent } from './interest-rate.component';
+import InterestRateComponent from './interest-rate.component';
 
 describe('InterestRateComponent', () => {
   let component: InterestRateComponent;
@@ -8,10 +7,9 @@ describe('InterestRateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InterestRateComponent]
-    })
-    .compileComponents();
-    
+      imports: [InterestRateComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(InterestRateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
