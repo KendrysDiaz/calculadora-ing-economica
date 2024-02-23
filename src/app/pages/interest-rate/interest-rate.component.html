@@ -32,39 +32,50 @@
         ></app-input>
         <app-input title="Capital" type="number" info="capital"></app-input>
         <app-input title="Interes" type="number" info="interest"></app-input>
-        <div class="flex gap-4 justify-between mb-3">
+        <div class="flex gap-4 justify-between mb-20">
           <h3 class="text-base text-black font-semibold">Tiempo</h3>
         </div>
       </form>
     </section>
     <section id="SectionResult">
-      <div class="bg-green-300 w-3/4">
-        <section class="flex justify-between">
-          <div>
-            <h4 class="text-base text-black font-semibold">Anual</h4>
-            <h1 class="text-5xl font-bold text-green-600 ml-5">10.2%</h1>
-          </div>
-          <div>
-            <h4 class="text-base text-black font-semibold">Trimestral</h4>
-            <h1 class="text-5xl font-bold text-green-600 ml-5">5.9%</h1>
+      <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-2">
+        <button
+          class="absolute w-1/2 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-4"
+        >
+          <p class="text-2xl font-bold">Calcular</p>
+        </button>
+        <section class="flex items-center justify-center mb-10">
+          <div class="flex justify-between w-3/4 mt-10">
+            <app-interest-ratemessage
+              rateMessage="10.2%"
+              title="Tasa Anual"
+            ></app-interest-ratemessage>
+            <app-interest-ratemessage
+              rateMessage="5.1%"
+              title="Tasa Trimestral"
+            ></app-interest-ratemessage>
           </div>
         </section>
-        <section class="flex">
-          <div class="rounded-l-3xl border border-green-400 bg-white">
+        <section class="flex m-10 justify-between">
+          <div
+            class="flex-1 rounded-l-3xl border-green-800 border-4 bg-white p-2"
+          >
             <h3>Monto Final</h3>
-            <h3>$</h3>
+            <h3 class="font-semibold ml-4">$10000</h3>
           </div>
-          <div class="bg-white">
+          <div class="flex-1 bg-white p-2 border-green-800 border-4">
             <h3>Capital</h3>
-            <h3>$</h3>
+            <h3 class="font-semibold ml-4">$2000</h3>
           </div>
-          <div class="bg-white">
-            <h3>Capital</h3>
-            <h3>$</h3>
+          <div class="flex-1 bg-white p-2 border-green-800 border-4">
+            <h3>Interes</h3>
+            <h3 class="font-semibold ml-4">$4000</h3>
           </div>
-          <div class="rounded-r-3xl border border-green-400 bg-white">
+          <div
+            class="flex-1 rounded-r-3xl bg-white p-2 border-green-800 border-4"
+          >
             <h3>Tiempo</h3>
-            <h3>10 Meses</h3>
+            <h3 class="font-semibold ml-4">10 Meses</h3>
           </div>
         </section>
       </div>
