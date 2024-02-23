@@ -1,7 +1,31 @@
 <div class="flex">
-  <div class="w-1/2" id="SectionInformation">
-    <h2></h2>
+  <div class="w-1/2 relative" id="SectionInformation">
+    <!-- Contenedor de la imagen -->
+    <div class="absolute bottom-0 left-0">
+      <img
+        src="assets/ImgFinanzas.png"
+        alt="Imagen Finanzas"
+        style="width: 70%; height: auto"
+      />
+    </div>
+    <!-- Capa de opacidad de color blanco -->
+    <div class="absolute inset-0 bg-white opacity-50"></div>
+    <!-- Contenedor de información -->
+    <div
+      class="absolute w-full flex flex-col justify-center items-center text-white"
+    >
+      <!-- Título -->
+      <h1 class="text-3xl font-bold mb-4 text-black">Título</h1>
+      <!-- Texto -->
+      <p class="text-lg text-center text-black">Texto de ejemplo</p>
+      <img
+      src="assets/NotImage.jpg"
+      alt="Imagen Finanzas"
+      style="width: 70%; height: auto"
+    />
+    </div>
   </div>
+
   <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100" id="CalculatorInteresRate">
     <section id="SectionOptions">
       <h2 class="text-xl text-black font-bold mb-3">

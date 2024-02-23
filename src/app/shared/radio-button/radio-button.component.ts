@@ -4,7 +4,15 @@ import { Component, Input } from '@angular/core';
   selector: 'app-radio-button',
   standalone: true,
   imports: [],
-  templateUrl: './radio-button.component.html',
+  template: `<div class="flex gap-2">
+    <p class="text-lg text-black font-semibold">{{ title }}</p>
+    <div class="mt-1">
+      <label class="container">
+        <input checked="checked" name="radio" type="radio" />
+        <div class="checkmark"></div>
+      </label>
+    </div>
+  </div> `,
   styleUrl: './radio-button.component.css',
 })
 export class RadioButtonComponent {

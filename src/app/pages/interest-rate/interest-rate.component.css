@@ -6,3 +6,9 @@
   margin-right: 40px;
   border: none; /* Quita el borde */
 }
+
+
+#SectionInformation .bg-cover {
+  background-size: 50%;
+  background-position: left bottom;
+}
