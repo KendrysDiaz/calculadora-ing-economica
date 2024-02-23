@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
-import { TeamworkComponent } from '../../shared/teamwork/teamwork.component';
+import TeamworkComponent from '../../shared/teamwork/teamwork.component';
 
 @Component({
   selector: 'app-home',

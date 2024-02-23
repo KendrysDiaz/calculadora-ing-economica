@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './teamwork.component.html',
   styleUrl: './teamwork.component.css'
 })
-export class TeamworkComponent {
+export default class TeamworkComponent {
 
 }

@@ -7,6 +7,12 @@ export const routes: Routes = [
     loadComponent: () => import('../app/pages/home/home.component'),
     children: [
       {
+        path: 'presentacion',
+        title: 'Presentacion',
+        loadComponent: () =>
+          import('../app/shared/teamwork/teamwork.component'),
+      },
+      {
         path: 'interest-rate',
         title: 'Tasa Interes',
         loadComponent: () =>
