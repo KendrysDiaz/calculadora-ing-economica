@@ -12,6 +12,11 @@ export const routes: Routes = [
     loadComponent: () => import('../app/pages/home/home.component'),
     children: [
       {
+        path:'',
+        redirectTo:'interest-rate',
+        pathMatch: 'full'
+      },
+      {
         path: 'interest-rate',
         title: 'Tasa Interes',
         loadComponent: () =>
