@@ -4,8 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-green': '#04773B',
-      }
+        "custom-green": "#04773B",
+      },
+      width: {
+        27: "27%",
+      },
     },
   },
   plugins: [],
