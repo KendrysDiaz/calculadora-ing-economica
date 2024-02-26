@@ -1,23 +1,35 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
   standalone: true,
   imports: [],
-  templateUrl: './input.component.html',
+  template: `<div class="flex gap-4 justify-between mb-3">
+    <h3 class="text-base text-black font-semibold">{{ title }}</h3>
+    <input
+      class="input w-9/12"
+      [value]="info"
+      (change)="onSelect($event)"
+      type="number"
+    />
+  </div> `,
   styleUrl: './input.component.css',
 })
 export class InputComponent {
-  @Input({ required: true }) title!: string;
-  @Input({ required: true }) info!: string;
-  @Input({ required: true }) type!: string;
-  
-  valor: any;
+  @Input() title!: string;
+  @Input() info!: string;
+  @Output() infoChange = new EventEmitter<string>();
+  @Input() control!: FormControl;
 
-  @Output() valorChange = new EventEmitter<any>();
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    console.log('titulo:', this.title);
+  }
 
-  onValorChange() {
-    this.valorChange.emit(this.valor);
+  onSelect(event: any) {
+    const selectedValue = event.target.value;
+    this.infoChange.emit(selectedValue);
   }
 }
-

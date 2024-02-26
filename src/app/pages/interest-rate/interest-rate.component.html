@@ -19,10 +19,10 @@
       <!-- Texto -->
       <p class="text-lg text-center text-black">Texto de ejemplo</p>
       <img
-      src="assets/NotImage.jpg"
-      alt="Imagen Finanzas"
-      style="width: 70%; height: auto"
-    />
+        src="assets/NotImage.jpg"
+        alt="Imagen Finanzas"
+        style="width: 70%; height: auto"
+      />
     </div>
   </div>
 
@@ -34,14 +34,16 @@
       <div id="TypeInteresRate" class="ml-5 mr-10 mb-3">
         <form action="" class="flex justify-between">
           <app-radio-button
-            title="Interes Simple"
+            label="Interes Simple"
             value="IntSim"
             id="IntSim"
+            (EventSelectTypeRate)="showContentRate()"
           ></app-radio-button>
           <app-radio-button
-            title="Interes Compuesto"
+            label="Interes Compuesto"
             value="IntCom"
             id="IntCom"
+            (EventSelectTypeRate)="showContentRate()"
           ></app-radio-button>
         </form>
       </div>
@@ -49,13 +51,40 @@
     <hr class="linea" />
     <section id="SectionInput">
       <form action="" [formGroup]="registrationForm" class="ml-5 mt-10 mr-10">
-        <app-input
-          title="Monto Final"
-          type="number"
-          info="finalAmount"
-        ></app-input>
-        <app-input title="Capital" type="number" info="capital"></app-input>
-        <app-input title="Interes" type="number" info="interest"></app-input>
+        <div class="flex gap-4 justify-between mb-3">
+          <h3 class="text-base text-black font-semibold">Valor Final</h3>
+          <input
+            formControlName="finalValue"
+            id="finalValue"
+            class="input w-3/4"
+            type="number"
+            name="finalValue"
+          />
+        </div>
+
+        <div class="flex gap-4 justify-between mb-3">
+          <h3 class="text-base text-black font-semibold">Valor Presente</h3>
+          <input
+            formControlName="presentValue"
+            id="presentValue"
+            type="number"
+            name="presentValue"
+            class="input w-3/4"
+          />
+        </div>
+
+        @if (showContent()) {
+        <div class="flex gap-4 justify-between mb-3">
+          <h3 class="text-base text-black font-semibold">Interes</h3>
+          <input
+            class="input w-3/4"
+            formControlName="interest"
+            id="interest"
+            type="number"
+            name="interest"
+          />
+        </div>
+        }
         <div class="flex gap-4 justify-between mb-20">
           <h3 class="text-base text-black font-semibold">Tiempo</h3>
         </div>
@@ -64,19 +93,16 @@
     <section id="SectionResult">
       <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-2">
         <button
+          (click)="calcular()"
           class="absolute w-1/2 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-4"
         >
           <p class="text-2xl font-bold">Calcular</p>
         </button>
         <section class="flex items-center justify-center mb-10">
-          <div class="flex justify-between w-3/4 mt-10">
+          <div class="w-3/4 mt-10">
             <app-interest-ratemessage
-              rateMessage="10.2%"
+              rateMessage="{{ infoTasa }}"
               title="Tasa Anual"
-            ></app-interest-ratemessage>
-            <app-interest-ratemessage
-              rateMessage="5.1%"
-              title="Tasa Trimestral"
             ></app-interest-ratemessage>
           </div>
         </section>
@@ -84,17 +110,19 @@
           <div
             class="flex-1 rounded-l-3xl border-green-800 border-4 bg-white p-2"
           >
-            <h3>Monto Final</h3>
-            <h3 class="font-semibold ml-4">$10000</h3>
+            <h3>Valor Futuro</h3>
+            <h3 class="font-semibold ml-4">${{ infofinalValue }}</h3>
           </div>
           <div class="flex-1 bg-white p-2 border-green-800 border-4">
-            <h3>Capital</h3>
-            <h3 class="font-semibold ml-4">$2000</h3>
+            <h3>Valor Presente</h3>
+            <h3 class="font-semibold ml-4">${{ infopresentValue }}</h3>
           </div>
+          @if (showContent()) {
           <div class="flex-1 bg-white p-2 border-green-800 border-4">
             <h3>Interes</h3>
-            <h3 class="font-semibold ml-4">$4000</h3>
+            <h3 class="font-semibold ml-4">${{ infoInteres }}</h3>
           </div>
+          }
           <div
             class="flex-1 rounded-r-3xl bg-white p-2 border-green-800 border-4"
           >
