@@ -42,7 +42,7 @@ export default class SimpleInterestsComponent {
   intereSimpleCalculator(){
     if (this.capital > 0 && this.tasainteres > 0 && this.time > 0) {
       this.interes = this.capital * this.tasainteres * this.time
-      this.monto = this.capital * (1 + (this.interes * this.time))
+      this.monto = this.capital * (1 + (this.tasainteres * this.time))
     } else {
       if (this.monto > 0 && this.capital > 0 && this.time > 0) {
         this.tasainteres = ((this.monto/this.capital)-1)/this.time
