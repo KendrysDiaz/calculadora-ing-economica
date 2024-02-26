@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SimpleInterestsComponent } from './simple-interests.component';
+import SimpleInterestsComponent from './simple-interests.component';
 
 describe('SimpleInterestsComponent', () => {
   let component: SimpleInterestsComponent;
@@ -8,10 +7,9 @@ describe('SimpleInterestsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SimpleInterestsComponent]
-    })
-    .compileComponents();
-    
+      imports: [SimpleInterestsComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SimpleInterestsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

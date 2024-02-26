@@ -1,14 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-radio-button',
   standalone: true,
   imports: [],
   template: `<div class="flex gap-2">
-    <p class="text-lg text-black font-semibold">{{ title }}</p>
+    <p class="text-lg text-black font-semibold">{{ label }}</p>
     <div class="mt-1">
       <label class="container">
-        <input checked="checked" name="radio" type="radio" />
+        <input
+          checked="checked"
+          name="typeInterestRate"
+          type="radio"
+          value="{{ value }}"
+          (change)="onSelect($event)"
+        />
         <div class="checkmark"></div>
       </label>
     </div>
@@ -18,9 +24,15 @@ import { Component, Input } from '@angular/core';
 export class RadioButtonComponent {
   constructor() {}
 
-  @Input({ required: true }) title!: string;
+  onSelect(event: any) {
+    console.log(this.label);
+    const selectedValue = event.target.value;
+    this.EventSelectTypeRate.emit(selectedValue);
+  }
 
-  @Input({ required: true }) value!: string;
+  @Output() EventSelectTypeRate = new EventEmitter<string>();
 
-  @Input({ required: true }) id!: string;
+  @Input({}) label!: string;
+  @Input({}) value!: string;
+  @Input({}) id!: string;
 }
