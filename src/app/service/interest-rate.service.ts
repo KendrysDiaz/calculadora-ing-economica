@@ -15,12 +15,14 @@ export class InterestRateService {
     const presentValue = interestRate.presentValue;
     const finalValue = interestRate.finalValue;
     const interes = interestRate.interest;
-    const time = interestRate.time;
+    const timeAnual = interestRate.timeAnual;
+    const timePeriodo = interestRate.timePeriodo;
 
     //Valores de salida
     let resultPresentValue: number = 0;
     let resultFinalValue: number = 0;
-    let resultInterestRate: number = 0;
+    let resultInterestRateAnual: number = 0;
+    let resultInterestRatePeriodo: number = 0;
     let resultInterest: number = 0;
 
     switch (tipoRate) {
@@ -30,23 +32,48 @@ export class InterestRateService {
           resultFinalValue = finalValue;
           resultPresentValue = presentValue;
           resultInterest = finalValue - presentValue;
-          resultInterestRate = ((finalValue / presentValue - 1) / 5) * 100;
+          resultInterestRateAnual =
+            ((finalValue / presentValue - 1) / timeAnual) * 100;
+          if (timePeriodo > 0) {
+            resultInterestRatePeriodo =
+              ((finalValue / presentValue - 1) / timePeriodo) * 100;
+          }
         }
-
         if (presentValue != null && interes != null) {
           resultFinalValue = interes + presentValue;
           resultPresentValue = presentValue;
           resultInterest = interes;
-          resultInterestRate = (interes / (presentValue * 18)) * 100;
-          console.log('formula 2');
+          console.log(interes, presentValue, timeAnual, timePeriodo);
+          resultInterestRateAnual =
+            (interes / (presentValue * timeAnual)) * 100;
+          if (timePeriodo > 0) {
+            resultInterestRatePeriodo =
+              (interes / (presentValue * timePeriodo)) * 100;
+          }
+        }
+
+        if (finalValue != null && interes != null && presentValue === 0) {
+          resultFinalValue = finalValue;
+          resultPresentValue = finalValue - interes;
+          resultInterest = interes;
+          resultInterestRateAnual =
+            (interes / (resultPresentValue * timeAnual)) * 100;
+          if (timePeriodo > 0) {
+            resultInterestRatePeriodo =
+              (interes / (resultPresentValue * timePeriodo)) * 100;
+          }
         }
         break;
 
       case false:
         resultFinalValue = finalValue;
         resultPresentValue = presentValue;
-        resultInterestRate =
-          (Math.pow(finalValue / presentValue, 1 / 5) - 1) * 100;
+        resultInterestRateAnual =
+          (Math.pow(finalValue / presentValue, 1 / timeAnual) - 1) * 100;
+        if (timePeriodo > 0) {
+          resultInterestRatePeriodo =
+            (Math.pow(finalValue / presentValue, 1 / timePeriodo) - 1) * 100;
+        }
 
         break;
       default:
@@ -56,7 +83,8 @@ export class InterestRateService {
     const Datos = {
       finalValue: resultFinalValue,
       presentValue: resultPresentValue,
-      interesRate: resultInterestRate,
+      interesRateAnual: resultInterestRateAnual,
+      interesRatePeriodo: resultInterestRatePeriodo,
       interest: resultInterest,
     };
 

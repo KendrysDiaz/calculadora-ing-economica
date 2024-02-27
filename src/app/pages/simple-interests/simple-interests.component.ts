@@ -26,7 +26,7 @@ export default class SimpleInterestsComponent {
     } else {
       this.tasainteres = value;
     }
-    
+
   }
   onValorChange3(value: any) {
     this.interes = value;
@@ -39,6 +39,7 @@ export default class SimpleInterestsComponent {
     this.hijo.timeCalculator();
     this.time = this.hijo.time;
   }
+  
   intereSimpleCalculator(){
     if (this.capital > 0 && this.tasainteres > 0 && this.time > 0) {
       this.interes = this.capital * this.tasainteres * this.time

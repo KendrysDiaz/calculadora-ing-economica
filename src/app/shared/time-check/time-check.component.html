@@ -1,63 +1,88 @@
 <div class="flex gap-4 justify-between mb-3">
-    <h3 class="text-base text-black font-semibold">Tiempo</h3>
-    <div>
-      <label class="text-black align-text-bottom">Especifico</label>
-      <input class="ml-1 mr-3" type="radio" value="2" [checked]="page === 1" (click)="page = 1" />
-      <label class="text-black align-text-bottom">Fechas</label>
-      <input class="ml-1 mr-3" type="radio" value="2" [checked]="page === 2" (click)="page = 2" />
-      <label class="text-black align-text-bottom">Periodo</label>
-      <input class="ml-1 mr-3" type="radio" value="3" [checked]="page === 3" (click)="page = 3" />
-    </div>
+  <h3 class="text-base text-black font-semibold">Tiempo</h3>
+  <div>
+    <label class="text-black align-text-bottom">Especifico</label>
+    <input
+      class="ml-1 mr-3"
+      type="radio"
+      value="2"
+      [checked]="page === 1"
+      (click)="page = 1"
+    />
+    <label class="text-black align-text-bottom">Fechas</label>
+    <input
+      class="ml-1 mr-3"
+      type="radio"
+      value="2"
+      [checked]="page === 2"
+      (click)="page = 2"
+    />
+    <label class="text-black align-text-bottom">Periodo</label>
+    <input
+      class="ml-1 mr-3"
+      type="radio"
+      value="3"
+      [checked]="page === 3"
+      (click)="page = 3"
+    />
+  </div>
 </div>
-@switch (page) {
-  @case (1) {
-    <div class="text-right mb-4">
-      <select class="mr-3" (change)="year=$any($event.target).value" >
-        <option [value]=0>Años</option>
-        @for (year of years; track $index) {
-        <option [value]=year>{{ year }}</option>
-        }
-      </select>
-      <select class="mr-3" (change)="month=$any($event.target).value">
-        <option [value]="0">Meses</option>
-        @for (month of months; track $index) {
-        <option [value]=month>{{ month }}</option>
-        }
-      </select>
-      <select class="mr-3" (change)="week=$any($event.target).value">
-        <option [value]="0">Semanas</option>
-        @for (week of weeks; track $index) {
-        <option [value]="week">{{ week }}</option>
-        }
-      </select>
-      <select  (change)="day=$any($event.target).value">
-        <option [value]="0">Días</option>
-        @for (day of days; track $index) {
-        <option [value]=day>{{ day }}</option>
-        }
-      </select>
-    </div>
-  }
-  @case (2) {
-    <div class="text-right mb-4" >
-      <input class="ml-1 " type="date" (change)="dateInit=$any($event.target).value"/>  -
-      <input class="ml-1 " type="date" (change)="dateFinish=$any($event.target).value"/>
-    </div>
-  }
-  @case (3) {
-    <div class="text-right mb-4">
-      <select class="mr-3" (change)="nPeriodos=$any($event.target).value" >
-        @for (day of days; track $index) {
-        <option [value]="day">{{ day }}</option>
-        }
-      </select>
-      <select (change)="periodo=$any($event.target).value" >
-        <option>Periodo</option>
-        @for (periodo of periodos; track $index) {
-        <option [value]="periodo.nombre">{{ periodo.nombre}}</option>
-        }
-      </select>
-    </div>
-  }
-}
-
+@switch (page) { @case (1) {
+<div class="text-right mb-4">
+  <select class="mr-3" (change)="year = $any($event.target).value">
+    <option [value]="0">Años</option>
+    @for (year of years; track $index) {
+    <option [value]="year">{{ year }}</option>
+    }
+  </select>
+  <select class="mr-3" (change)="month = $any($event.target).value">
+    <option [value]="0">Meses</option>
+    @for (month of months; track $index) {
+    <option [value]="month">{{ month }}</option>
+    }
+  </select>
+  <select class="mr-3" (change)="week = $any($event.target).value">
+    <option [value]="0">Semanas</option>
+    @for (week of weeks; track $index) {
+    <option [value]="week">{{ week }}</option>
+    }
+  </select>
+  <select (change)="day = $any($event.target).value">
+    <option [value]="0">Días</option>
+    @for (day of days; track $index) {
+    <option [value]="day">{{ day }}</option>
+    }
+  </select>
+</div>
+} @case (2) {
+<div class="text-right mb-4">
+  <input
+    class="ml-1"
+    type="date"
+    (change)="dateInit = $any($event.target).value"
+  />
+  -
+  <input
+    class="ml-1"
+    type="date"
+    (change)="dateFinish = $any($event.target).value"
+  />
+</div>
+} @case (3) {
+<div class="text-right mb-4">
+  <select class="mr-3" (change)="nPeriodos = $any($event.target).value">
+    @for (day of days; track $index) {
+    <option [value]="day">{{ day }}</option>
+    }
+  </select>
+  <select
+    (change)="onPeriodoChange($event)"
+    (change)="periodo = $any($event.target).value"
+  >
+    <option>Periodo</option>
+    @for (periodo of periodos; track $index) {
+    <option [value]="periodo.nombre">{{ periodo.nombre }}</option>
+    }
+  </select>
+</div>
+} }
