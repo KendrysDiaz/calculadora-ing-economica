@@ -1,5 +1,5 @@
 <div class="flex">
-  <div class="w-1/2 relative" id="SectionInformation">
+  <div class="w-1/2 h-screen relative" id="SectionInformation">
     <!-- Contenedor de la imagen -->
     <div class="absolute bottom-0 left-0">
       <img
@@ -9,17 +9,19 @@
       />
     </div>
     <!-- Capa de opacidad de color blanco -->
-    <div class="absolute inset-0 bg-white opacity-50"></div>
+    <div class="absolute inset-0"></div>
     <!-- Contenedor de información -->
     <div
-      class="absolute w-full flex flex-col justify-center items-center text-white"
+      class="absolute w-full flex flex-col mt-10 justify-center items-center text-white"
     >
       <!-- Título -->
-      <h1 class="text-3xl font-bold mb-4 text-black">Título</h1>
+      <h1 class="text-3xl font-bold mb-10 text-green-800">
+        {{ infoSeleccionada!.titulo }}
+      </h1>
       <!-- Texto -->
-      <p class="text-lg text-center text-black">Texto de ejemplo</p>
       <img
-        src="assets/NotImage.jpg"
+        src="assets/formulas{{ infoSeleccionada?.url }}"
+        class="bg-white opacity-90 rounded-xl"
         alt="Imagen Finanzas"
         style="width: 70%; height: auto"
       />
@@ -85,25 +87,34 @@
           />
         </div>
         }
-        <div class="flex gap-4 justify-between mb-20">
-          <h3 class="text-base text-black font-semibold">Tiempo</h3>
+        <div class="mb-20">
+          <app-time-check
+            [tipoTasaSeleccionada]="showContent()"
+          ></app-time-check>
         </div>
       </form>
     </section>
     <section id="SectionResult">
       <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-2">
         <button
-          (click)="calcular()"
+          (click)="ejecutarFuncionHijo(); calcular()"
           class="absolute w-1/2 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-4"
         >
           <p class="text-2xl font-bold">Calcular</p>
         </button>
         <section class="flex items-center justify-center mb-10">
-          <div class="w-3/4 mt-10">
+          <div class="flex gap-3 w-3/4 mt-10 justify-between">
+            @if (isSelectedPeriodo) {
             <app-interest-ratemessage
-              rateMessage="{{ infoTasa }}"
-              title="Tasa Anual"
-            ></app-interest-ratemessage>
+              rateMessage="{{ infoTasaPeriodo }}"
+              title="{{ namePeriodo }}"
+            ></app-interest-ratemessage
+            >}@else {
+            <app-interest-ratemessage
+              rateMessage="{{ infoTasaAnual }}"
+              title="Anual"
+            ></app-interest-ratemessage
+            >}
           </div>
         </section>
         <section class="flex m-10 justify-between">
@@ -127,7 +138,10 @@
             class="flex-1 rounded-r-3xl bg-white p-2 border-green-800 border-4"
           >
             <h3>Tiempo</h3>
-            <h3 class="font-semibold ml-4">10 Meses</h3>
+            <h3 class="font-semibold ml-4">
+              @if (isSelectedPeriodo) { {{ hijo.nPeriodos }}-
+              {{ namePeriodo }}}@else { {{ infoTiempo }} - Años }
+            </h3>
           </div>
         </section>
       </div>
