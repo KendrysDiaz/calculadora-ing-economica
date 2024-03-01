@@ -1,1 +1,52 @@
-<p>compound-interest works!</p>
+<div class="contenedor">
+    <h1 id="titulo">Ingresa los datos de tu ejercicio</h1>
+    <form formGroup="formGroup" (submit)="calcularInteres()">
+        <div class="campo">
+            <label for="calculo">Calcular:</label>
+            <select id="calculo" formControlName="calculo">
+              <option value="capital">Capital</option>
+              <option value="tasaInteres">Tasa de interés</option>
+              <option value="tiempo">Tiempo</option>
+              <option value="monto">Monto</option>
+            </select>
+          </div>
+      <div class="campo">
+        <label for="capital">Capital/VP:</label>
+        <input type="number" id="capital" formControlName="capital" placeholder="0.00">
+      </div>
+  
+      <div class="campo">
+        <label for="tasa_interes">Tasa de interés:</label>
+        <input type="number" id="tasa_interes" formControlName="tasaInteres" placeholder="0.00%">
+      </div>
+  
+      <div class="campo">
+        <label for="periodo">Periodo:</label>
+       <select id="periodo" formControlName="periodo">
+          <option value="diario">Seleccionar</option>
+          <option value="bimestral">diario</option>
+          <option value="mensual">Mensual</option>
+          <option value="anual">Anual</option>
+          <option value="trimestral">Trimestral</option>
+          <option value="semestral">Semestral</option>
+        </select>
+      </div>
+  
+      <div class="campoNumero">
+        <label for="tiempo">Tiempo:</label>
+        <input type="number" id="tiempo" formControlName="tiempo" placeholder="0">
+      </div>
+  
+      <div class="campo">
+        <label for="monto">Monto/VF:</label>
+        <input type="number" id="monto" formControlName="monto" placeholder="0.00">
+      </div>
+  
+      <div class="campo">
+        <button type="submit" (click)="calcularInteres()">Calcular</button>
+      </div>
+  
+      <textarea readonly class="resultado-textarea">{{ resultadoCalculo }}</textarea>
+    </form>
+  </div>
+  
