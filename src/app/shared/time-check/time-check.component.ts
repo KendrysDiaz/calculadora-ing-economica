@@ -44,24 +44,19 @@ export class TimeCheckComponent {
     if (this.page === 1) {
       if (year > 0 && month === 0 && week === 0 && day === 0) {
         this.time = year;
-
-        if (!this.tipoTasaSeleccionada) {
-          this.time = year;
-        }
       } else if (year === 0 && month > 0 && week === 0 && day === 0) {
         this.time = month / 12;
-        console.log('info sele', this.tipoTasaSeleccionada);
-        if (!this.tipoTasaSeleccionada) {
+        if (this.tipoTasaSeleccionada) {
           this.time = month;
         }
       } else if (year === 0 && month === 0 && week > 0 && day === 0) {
         this.time = week / 52;
-        if (!this.tipoTasaSeleccionada) {
+        if (this.tipoTasaSeleccionada) {
           this.time = week;
         }
       } else if (year === 0 && month === 0 && week === 0 && day > 0) {
         this.time = day / 360;
-        if (!this.tipoTasaSeleccionada) {
+        if (this.tipoTasaSeleccionada) {
           this.time = day;
         }
       } else if (year > 0 && month > 0 && week === 0 && day === 0) {

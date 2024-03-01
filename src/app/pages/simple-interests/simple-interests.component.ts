@@ -46,8 +46,13 @@ export default class SimpleInterestsComponent {
     this.monto = 0;
     this.interes = 0;
     this.tasainteres = 0;
+    this.time = 0;
     this.hijo.time = 0;
     this.hijo.page = 0;
+    this.hijo.year = 0;
+    this.hijo.month = 0;
+    this.hijo.day = 0;
+    this.hijo.week = 0;
 }
   
   ejecutarFuncionHijo() {
@@ -76,6 +81,7 @@ export default class SimpleInterestsComponent {
         this.calculateTimeFromInterest();
       }
     }
+    console.log(this.capital, this.tasainteres, this.time)
     this.vaciarCampos();
   }
   setCalculadoValues(result1: any, result2: any, value1: any, value2: any) {
@@ -86,29 +92,30 @@ export default class SimpleInterestsComponent {
   }
   
   calculateInterestAndAmount() {
+    console.log(this.capital * this.tasainteres * this.time)
     this.interes = this.capital * this.tasainteres * this.time;
     this.monto = this.capital * (1 + (this.tasainteres * this.time));
-    this.setCalculadoValues('Interes simple','Monto/VF', this.interes,this.monto);
+    this.setCalculadoValues('Interes simple','Monto/VF', this.interes + '$',this.monto + '$');
   }
   
   calculateInterestRateFromAmount() {
-    this.tasainteres = ((this.monto / this.capital) - 1) / this.time;
-    this.setCalculadoValues('Tasa de interes',0,this.tasainteres,0);
+    this.tasainteres = (((this.monto / this.capital) - 1) / this.time)*100;
+    this.setCalculadoValues('Tasa de interes',0,this.tasainteres + '%',0);
   }
   
   calculateInterestRateFromInterest() {
-    this.tasainteres = this.interes / (this.capital * this.time);
-    this.setCalculadoValues('Tasa de interes',0,this.tasainteres,0);
+    this.tasainteres = (this.interes / (this.capital * this.time))*100;
+    this.setCalculadoValues('Tasa de interes',0,this.tasainteres + '%',0);
   }
   
   calculateCapitalFromInterest() {
     this.capital = this.interes / (this.tasainteres * this.time);
-    this.setCalculadoValues('Capital/VP',0,this.capital,0);
+    this.setCalculadoValues('Capital/VP',0,this.capital + '$',0);
   }
   
   calculateCapitalFromAmount() {
     this.capital = this.monto / (1 + (this.tasainteres * this.time));
-    this.setCalculadoValues('Capital/VP',0,this.capital,0);
+    this.setCalculadoValues('Capital/VP',0,this.capital + '$',0);
   }
   
   calculateTimeFromAmount() {
