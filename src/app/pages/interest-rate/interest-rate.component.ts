@@ -46,11 +46,11 @@ export default class InterestRateComponent {
 
   constructor(private interesRateService: InterestRateService) {
     this.registrationForm = new FormGroup({
-      finalValue: new FormControl(0),
-      presentValue: new FormControl(0),
-      interest: new FormControl(0),
-      timeAnual: new FormControl(0),
-      timePeriodo: new FormControl(0),
+      finalValue: new FormControl(),
+      presentValue: new FormControl(),
+      interest: new FormControl(),
+      timeAnual: new FormControl(),
+      timePeriodo: new FormControl(),
     });
 
     this.infoInicial = [
@@ -112,16 +112,21 @@ export default class InterestRateComponent {
   }
 
   vaciarCampos() {
-    this.registrationForm.get('timePeriodo')?.setValue(0);
-    this.registrationForm.get('finalValue')?.setValue(0);
-    this.registrationForm.get('presentValue')?.setValue(0);
-    this.registrationForm.get('timePeriodo')?.setValue(0);
-    this.registrationForm.get('interest')?.setValue(0);
-    this.registrationForm.get('timeAnual')?.setValue(0);
-
+    this.registrationForm.get('timePeriodo')?.setValue('');
+    this.registrationForm.get('finalValue')?.setValue('');
+    this.registrationForm.get('presentValue')?.setValue('');
+    this.registrationForm.get('timePeriodo')?.setValue('');
+    this.registrationForm.get('interest')?.setValue('');
+    this.registrationForm.get('timeAnual')?.setValue('');
     this.hijo.page = 0;
     this.hijo.time = 0;
+    this.hijo.year = 0;
+    this.hijo.month = 0;
+    this.hijo.week = 0;
+    this.hijo.day = 0;
     this.hijo.nPeriodos = 0;
+    this.hijo.periodo = '';
+    this.hijo.page = 0;
   }
 
   reiniciarTitulos() {
@@ -132,7 +137,11 @@ export default class InterestRateComponent {
     this.infoTasaAnual = '';
     this.infoTasaPeriodo = '';
     this.namePeriodo = '';
+    this.hijo.page = 0;
+    this.hijo.time = 0;
+    this.hijo.nPeriodos = 0;
   }
+
   showContentRate() {
     this.showContent.update((value) => !value);
     let index: number = this.showContent() ? 0 : 1;
