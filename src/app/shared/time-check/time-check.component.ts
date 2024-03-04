@@ -33,7 +33,8 @@ export class TimeCheckComponent {
   page: number = 0;
   time: number = 0;
   namePeriodo: any;
-  @Input() tipoTasaSeleccionada?: any; //es para saber que tipo de tasa esta trabajando
+  @Input() tipoTasaSeleccionada?: any; //es para saber que tipo de tasa esta trabajando(Lo necesito para las fechas)
+  @Input() tipoBotton?: any = ""; //para que no interfiera con lo de kendrys
   selectPeriodo: boolean = false;
 
   timeCalculator() {
@@ -41,22 +42,28 @@ export class TimeCheckComponent {
     let year = Number(this.year);
     let day = Number(this.day);
     let week = Number(this.week);
+    console.log('Tipo tasa seleccionada: ', this.tipoTasaSeleccionada);
     if (this.page === 1) {
       if (year > 0 && month === 0 && week === 0 && day === 0) {
         this.time = year;
+
+        if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
+          this.time = year;
+        }
       } else if (year === 0 && month > 0 && week === 0 && day === 0) {
         this.time = month / 12;
-        if (this.tipoTasaSeleccionada) {
+
+        if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = month;
         }
       } else if (year === 0 && month === 0 && week > 0 && day === 0) {
         this.time = week / 52;
-        if (this.tipoTasaSeleccionada) {
+        if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = week;
         }
       } else if (year === 0 && month === 0 && week === 0 && day > 0) {
         this.time = day / 360;
-        if (this.tipoTasaSeleccionada) {
+        if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = day;
         }
       } else if (year > 0 && month > 0 && week === 0 && day === 0) {
