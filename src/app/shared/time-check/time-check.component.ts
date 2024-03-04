@@ -34,7 +34,7 @@ export class TimeCheckComponent {
   time: number = 0;
   namePeriodo: any;
   @Input() tipoTasaSeleccionada?: any; //es para saber que tipo de tasa esta trabajando(Lo necesito para las fechas)
-  @Input() tipoBotton?: any=""; //para que no interfiera con lo de kendrys
+  @Input() tipoBotton?: any = ""; //para que no interfiera con lo de kendrys
   selectPeriodo: boolean = false;
 
   timeCalculator() {

@@ -1,0 +1,93 @@
+/* compound-interest.component.css */
+.contenedor h1{
+    color: #2d3a3a; /* Color de texto oscuro */
+    font-size: 25px; /* Tamaño de fuente */
+    margin-bottom: 20px; /* Margen inferior para separar del contenido siguiente */
+    text-align: center; /* Alinea el texto al centro */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    font-weight: bold; /* Negrita */
+}
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todo a la derecha */
+    padding: 20px;
+    background-color: #a9e6c4; /* Color verde suave */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
+    margin-left: 900px;
+    margin-top: 60px;
+  }
+  
+  .resultado {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #2d3a3a; /* Color de texto más oscuro */
+  }
+  
+  /* Estilos adicionales para hacerlo más atractivo */
+  .contenedor h2 {
+    color: #2d3a3a;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #5ca88e; /* Color verde más oscuro para el botón */
+    color: #fff; /* Texto en color blanco */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 70%;
+  }
+  
+  button:hover {
+    background-color: #4a7e69; /* Cambia el color al pasar el ratón sobre el botón */
+  }
+.campo{
+    margin-bottom: 10px;
+  }
+  .campo label {
+    margin-bottom: 5px;
+  }
+  
+  .campo input {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc; /* Borde gris claro */
+    width: 100%;
+    height: 40px;
+  }
+  .campo input:focus {
+    outline: none; /* Quita el borde al hacer clic en el campo */
+    border-color: #5ca88e; /* Cambia el color del borde al hacer clic en el campo */
+}
+.campoNumero{
+    margin-bottom: 10px;
+  }
+  .campoNumero label {
+    margin-bottom: 5px;
+  }
+  
+  .campoNumero input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Borde gris claro */
+    width: 100%;
+  }
+  .campoNumero input:focus {
+    outline: none; /* Quita el borde al hacer clic en el campo */
+    border-color: #5ca88e; /* Cambia el color del borde al hacer clic en el campo */
+}
+/* app.component.css */
+.resultado-textarea {
+  background-color: #f0f0f0; /* Fondo gris */
+  color: #333; /* Color del texto */
+  border: 1px solid #ccc; /* Borde opcional */
+  width: 100%; /* Ajusta el ancho según tus necesidades */
+  height: 100px; /* Ajusta la altura según tus necesidades */
+  resize: none; /* Evita que el usuario redimensione el textarea */
+}

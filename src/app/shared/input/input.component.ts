@@ -10,12 +10,16 @@ export class InputComponent {
   @Input() title!: string;
   @Input() info!: string;
   @Input() type!: string;
+  @Input() init!: string;
 
   valor: any;
 
   @Output() valorChange = new EventEmitter<any>();
 
   onValorChange() {
+    this.valorChange.emit(this.valor);
+  }
+  clear(){
     this.valorChange.emit(this.valor);
   }
 }
