@@ -25,7 +25,6 @@ export class RadioButtonComponent {
   constructor() {}
 
   onSelect(event: any) {
-    console.log(this.label);
     const selectedValue = event.target.value;
     this.EventSelectTypeRate.emit(selectedValue);
   }

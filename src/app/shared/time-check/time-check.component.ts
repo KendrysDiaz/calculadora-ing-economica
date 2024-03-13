@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class TimeCheckComponent {
   years = Array.from({ length: 100 }, (_, i) => i + 1); // Años desde 1 al 100
-  months = Array.from({ length: 12 }, (_, i) => i + 1); // Meses del 1 al 12
+  months = Array.from({ length: 100 }, (_, i) => i + 1); // Meses del 1 al 100
   weeks = Array.from({ length: 52 }, (_, i) => i + 1); // Semanas del 1 al 52
   days = Array.from({ length: 100 }, (_, i) => i + 1); // Días del 1 al 31
   periodos = [
@@ -22,6 +22,7 @@ export class TimeCheckComponent {
     { nombre: 'Mensual', equivalencia: '1 mes' },
     { nombre: 'Quincenal', equivalencia: '15 días' },
   ];
+
   year = 0;
   month: number = 0;
   week: number = 0;
@@ -32,9 +33,12 @@ export class TimeCheckComponent {
   periodo: string = '';
   page: number = 0;
   time: number = 0;
+  tipoDeTiempo: string = 'Anual';
   namePeriodo: any;
   @Input() tipoTasaSeleccionada?: any; //es para saber que tipo de tasa esta trabajando(Lo necesito para las fechas)
   @Input() tipoBotton?: any = ''; //para que no interfiera con lo de kendrys
+  @Input() tipoTasa?: any = ''; //para que no interfiera con lo de kendrys
+
   selectPeriodo: boolean = false;
 
   timeCalculator() {
@@ -42,29 +46,34 @@ export class TimeCheckComponent {
     let year = Number(this.year);
     let day = Number(this.day);
     let week = Number(this.week);
-    console.log('Tipo tasa seleccionada: ', this.tipoTasaSeleccionada);
     if (this.page === 1) {
+      this.tipoDeTiempo = 'Anual';
       if (year > 0 && month === 0 && week === 0 && day === 0) {
         this.time = year;
 
         if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = year;
+          this.tipoDeTiempo = 'Anual';
         }
       } else if (year === 0 && month > 0 && week === 0 && day === 0) {
         this.time = month / 12;
 
         if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = month;
+          this.tipoDeTiempo = 'Mensual';
         }
       } else if (year === 0 && month === 0 && week > 0 && day === 0) {
         this.time = week / 52;
+
         if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = week;
+          this.tipoDeTiempo = 'Semanal';
         }
       } else if (year === 0 && month === 0 && week === 0 && day > 0) {
         this.time = day / 360;
         if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = day;
+          this.tipoDeTiempo = 'Diario';
         }
       } else if (year > 0 && month > 0 && week === 0 && day === 0) {
         this.time = year + month / 12;
@@ -90,6 +99,7 @@ export class TimeCheckComponent {
         this.time = year + month / 12 + week / 52 + day / 360;
       }
     } else if (this.page === 2) {
+      this.tipoDeTiempo = 'Anual';
       let fecha1 = new Date(this.dateInit);
       let fecha2 = new Date(this.dateFinish);
       let diferenciaEnTiempo = Math.abs(fecha2.getTime() - fecha1.getTime());
@@ -117,6 +127,7 @@ export class TimeCheckComponent {
   onPeriodoChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.namePeriodo = target.value;
+    this.tipoDeTiempo = this.namePeriodo;
     this.selectPeriodo = true;
   }
 }

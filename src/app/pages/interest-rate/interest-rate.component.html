@@ -1,6 +1,5 @@
 <div class="flex">
   <div class="w-1/2 h-screen relative" id="SectionInformation">
-    <!-- Contenedor de la imagen -->
     <div class="absolute bottom-0 left-0">
       <img
         src="assets/ImgFinanzas.png"
@@ -8,31 +7,36 @@
         style="width: 70%; height: auto"
       />
     </div>
-    <!-- Capa de opacidad de color blanco -->
+
     <div class="absolute inset-0"></div>
     <!-- Contenedor de información -->
     <div
-      class="absolute w-full flex flex-col mt-10 justify-center items-center text-white"
+      class="absolute ml-20 pr-20 w-full flex flex-col mt-10 justify-center items-center text-white"
     >
       <!-- Título -->
-      <h1 class="text-3xl font-bold mb-10 text-green-800">
+      <h1 class="text-3xl font-bold mb-5 text-green-800">
         {{ infoSeleccionada!.titulo }}
       </h1>
       <!-- Texto -->
+
+      <p class="text-lg pr-5 pl-5 text-black text-justify mx-12 mb-5">
+        La
+        <span class="font-bold text-custom-green">{{
+          infoSeleccionada?.titulo
+        }}</span>
+        {{ infoSeleccionada?.informacion }}
+      </p>
       <img
         src="assets/formulas{{ infoSeleccionada?.url }}"
         class="bg-white opacity-90 rounded-xl"
         alt="Imagen Finanzas"
-        style="width: 70%; height: auto"
+        style="width: 75%; height: auto"
       />
     </div>
   </div>
 
   <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100" id="CalculatorInteresRate">
     <section id="SectionOptions">
-      <h2 class="text-xl text-black font-bold mb-3">
-        Seleccione el tipo de tasa de interes
-      </h2>
       <div id="TypeInteresRate" class="ml-5 mr-10 mb-3">
         <form action="" class="flex justify-between">
           <app-radio-button
@@ -52,7 +56,36 @@
     </section>
     <hr class="linea" />
     <section id="SectionInput">
-      <form action="" [formGroup]="registrationForm" class="ml-5 mt-10 mr-10">
+      <form action="" [formGroup]="registrationForm" class="ml-5 mt-5 mr-10">
+        @if (!showContent()) {
+        <div class="flex items-center mb-5 gap-10">
+          <select
+            #selectElement
+            id="capitalizacionSelect"
+            class="flex-grow input"
+            (change)="onCapitalizacionChange($event)"
+          >
+            <option value="">Capitalizacion</option>
+            @for (periodo of periodos; track $index) {
+            <option [value]="periodo.nombre">
+              {{ periodo.nombre }}
+            </option>
+            }
+          </select>
+          <select
+            #selectElement
+            id="tasaFinalSelect"
+            class="flex-grow input"
+            (change)="onTasaFinalChange($event)"
+          >
+            <option value="">Tasa Final</option>
+            @for (periodo of periodos; track $index) {
+            <option [value]="periodo.nombre">{{ periodo.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        }
         <div class="flex gap-4 justify-between mb-3">
           <h3 class="text-base text-black font-semibold">Valor Final</h3>
           <input
@@ -87,7 +120,7 @@
           />
         </div>
         }
-        <div class="mb-20">
+        <div class="mb-14">
           <app-time-check
             [tipoTasaSeleccionada]="showContent()"
             [tipoBotton]="'TasaInteres'"
@@ -103,45 +136,42 @@
         >
           <p class="text-2xl font-bold">Calcular</p>
         </button>
-        <section class="flex items-center justify-center mb-10">
-          <div class="flex gap-3 w-3/4 mt-10 justify-between">
-            @if (isSelectedPeriodo) {
+        <section class="flex items-center justify-center">
+          <div class="gap-3 w-3/4 mt-10 justify-between">
             <app-interest-ratemessage
-              rateMessage="{{ infoTasaPeriodo }}"
-              title="{{ namePeriodo }}"
-            ></app-interest-ratemessage
-            >}@else {
-            <app-interest-ratemessage
-              rateMessage="{{ infoTasaAnual }}"
-              title="Anual"
-            ></app-interest-ratemessage
-            >}
+              rateMessage="{{ infoTasaFinal.numero }}"
+              title="{{ infoTasaFinal.unidadDeTiempo }}"
+              informacioExtra=" {{ infoTasaAnualCuandoEsPeriodo }}"
+              unidadDeTiempo="{{ tiempo.unidadDeTiempo }}"
+              [tipoTasa]="showContent()"
+      
+            ></app-interest-ratemessage>
           </div>
         </section>
-        <section class="flex m-10 justify-between">
+        <section class="flex m-5 justify-between">
           <div
             class="flex-1 rounded-l-3xl border-green-800 border-4 bg-white p-2"
           >
-            <h3>Valor Futuro</h3>
-            <h3 class="font-semibold ml-4">${{ infofinalValue }}</h3>
+            <h3 class="text-sm">Valor Final</h3>
+            <h3 class="font-sm ml-4">${{ infofinalValue }}</h3>
           </div>
           <div class="flex-1 bg-white p-2 border-green-800 border-4">
-            <h3>Valor Presente</h3>
-            <h3 class="font-semibold ml-4">${{ infopresentValue }}</h3>
+            <h3 class="text-sm">Valor Presente</h3>
+            <h3 class="font-sm ml-4">${{ infopresentValue }}</h3>
           </div>
           @if (showContent()) {
           <div class="flex-1 bg-white p-2 border-green-800 border-4">
-            <h3>Interes</h3>
-            <h3 class="font-semibold ml-4">${{ infoInteres }}</h3>
+            <h3 class="text-sm">Interes</h3>
+            <h3 class="font-sm ml-4">${{ infoInteres }}</h3>
           </div>
           }
           <div
             class="flex-1 rounded-r-3xl bg-white p-2 border-green-800 border-4"
           >
-            <h3>Tiempo</h3>
-            <h3 class="font-semibold ml-4">
-              @if (isSelectedPeriodo) { {{ hijo.nPeriodos }}-
-              {{ namePeriodo }}}@else { {{ infoTiempo }} - Años }
+            <h3 class="text-sm">Tiempo</h3>
+            <h3 class="font-sm ml-4">
+              {{ tiempo.numero }}
+              {{ obtenerNombrePeriodo(tiempo.unidadDeTiempo) }}
             </h3>
           </div>
         </section>
@@ -149,4 +179,3 @@
     </section>
   </div>
 </div>
-
