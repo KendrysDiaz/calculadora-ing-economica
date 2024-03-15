@@ -25,12 +25,13 @@ export const routes: Routes = [
           import('../app/pages/simple-interests/simple-interests.component'),
       },
 
-      {
+     {
         path: 'compound-interest',
         title: 'Interes Compuesto',
         loadComponent: () =>
           import('../app/pages/compound-interest/compound-interest.component'),
       },
+
     ],
   },
   {

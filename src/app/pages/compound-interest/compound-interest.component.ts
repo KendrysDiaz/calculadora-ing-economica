@@ -1,121 +1,124 @@
-  import { Component } from '@angular/core';
-  import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Component, input } from "@angular/core";
+import { InteresCompuestoServiceService } from "../../service/interes-compuesto.service";
 
-  @Component({
-    selector: 'app-compound-interest',
-    standalone: true,
-    templateUrl: './compound-interest.component.html',
-    styleUrls: ['./compound-interest.component.css'],
-  })
-  export default class CompoundInterestComponent {
-    formGroup: FormGroup;
-    resultadoCalculo: string = '';
-    
+@Component({
+  selector: 'app-compound-interest',
+  standalone: true,
+  templateUrl: './compound-interest.component.html',
+  styleUrls: ['./compound-interest.component.css'],
+  imports: [ ReactiveFormsModule, ]
+})
 
-    constructor(private formBuilder: FormBuilder) {
-      this.formGroup = new FormGroup({
-        calculo: new FormControl(),
-        capital: new FormControl(0),
-        tasaInteres:new FormControl(0),
-        periodo: new FormControl(0),
-        tiempo: new FormControl(0),
-        monto: new FormControl(0),
-      }); 
-    }
-    calcularInteres() {
-      console.log(this.formGroup.value);
-      if (true) {
-        this.resultadoCalculo = this.calular(this.formGroup?.value);
-      } else {
-        this.resultadoCalculo = 'Por favor, completa todos los campos.';
-      }
-    }
+
+export default class CompoundInterestComponent {
 
   
+  intervalosTiempo = [
+    { value: 'dias', label: 'Días', selected: false },
+    { value: 'meses', label: 'Meses', selected: false },
+    { value: 'anos', label: 'Años', selected: false },
+  ];
+  interesTotalCalculado: string  = '';
+  formGroup!: FormGroup;
+  opcion: boolean = false;
+  title: string = "Interes simple";
 
-    getValuePeriodoMeses(periodo: any, tip: string): number {
-      switch (periodo) {
-        case 'dias':
-          return (tip == 'meses') ? 30 : 360;
-        case 'meses':
-          return (tip == 'meses') ? 1 : 12;
-        case 'anos':
-          return (tip == 'meses') ? 12 : 1;
-        default:
-          return 0;
+  labelCampo1: string = "campo";
+  labelCampo2: string = "campo";
+  activarCampoTiempo: boolean = true;
+  simbolo: string  = '$';
+
+
+
+
+  constructor(private fb: FormBuilder,
+    private interesCompuesto: InteresCompuestoServiceService,
+    private route: ActivatedRoute
+  ) {
+    this.buildForms();
+    this.configInitial();
+  }
+
+  private buildForms() {
+    this.formGroup = this.fb.group(
+      {
+        periodos: this.fb.array([]),
+        capital: new FormControl('', Validators.required),
+        tasaInteres: new FormControl('', Validators.required),
+        monto: new FormControl('', [Validators.required])
+      });
+
+  }
+
+  private configInitial() {
+
+    this.route.paramMap.subscribe(params => {
+      this.opcion = params.has('id');
+      if (this.opcion) {
+        this.setCampos();
       }
-    }
-    calular(interes: any): string {
-      let op = interes;
-      let message = 'seleccione que desea calcular';
-      if (op != "Seleccionar") {
-        switch (op) {
-          case 'capital':
-            message = this.calcularCapital(interes);
-            break;
-          case 'periodos':
-            message = this.calcularPeriodo(interes);
-            break
-          case 'tasaInteres':
-            message = this.calcularTasaInteres(interes);
-            break
-          case 'monto': 
-            debugger
-            message = this.calcularMonto(interes);
-            break
-          default:
-            break;
-        }
-      }
-      return message;
-    }
-
-    private validProperty(interest: any): string[] {
-      const object: { [key: string]: any } = interest;
-      const emptyProperties: string[] = [];
-
-      for (const property in object) {
-        if (object.hasOwnProperty(property)) {
-          const value = object[property];
-          if (value === '' || value === null || (Array.isArray(value) && value.length === 0)) {
-            emptyProperties.push(property);
-          }
-        }
-      }
-      return emptyProperties;
-    }
+    });
+  }
+  private setCampos() {
+    this.buildForms();
+    this.simbolo = "$"
+  }
 
 
-    private calcularMonto(interest: any): string {
-      const sum = this.getPeriodoSum(interest.tiempo, 'meses');
-      const base = 1 + interest.tasaInteres / 100;
-      const result = Math.pow(base, sum);
-      const compoundAmount = interest.capital * result;
-      return `El monto compuesto durante ${sum} meses es  $${Math.round(compoundAmount)} mensual`;
-    }
+  ngOnInit(): void {
+  }
 
-    private calcularTasaInteres(interest: any): string {
-      const sum = this.getPeriodoSum(interest.tiempo, 'meses');
-      const base = interest.monto / interest.capital;
-      const exponente = 1 / sum;
-      const Tasa = Math.pow(base, exponente) - 1;
-      return `La tasa de interés para el monto de $${interest.monto} es de ${Tasa.toFixed(3)} meses.`;
-    }
+  get periodos(): FormArray {
+    return this.formGroup.get("periodos") as FormArray
+  }
 
-    private calcularPeriodo(interest: any): string {
-      const N = (Math.log10(interest.monto) - Math.log10(interest.capital)) / Math.log10(1 + interest.tasaInteres / 100);
-      return `El tiempo requerido para alcanzar un monto de $${interest.monto} es de ${Math.round(N)} meses.`;
-    }
+  newPeriodo(): FormGroup {
+    return this.fb.group({
+      periodo: ['', Validators.required],
+      valor: ['', Validators.required],
+    })
+  }
 
-    private calcularCapital(interest: any): string {
-      const suma = this.getPeriodoSum(interest.tiempo, '');
-      const base = 1 + (interest.tasaInteres / 100);
-      const result = Math.pow(base, suma);
-      const capital = interest.monto / result;
-      return `Su capital inicial es de $${Math.round(capital)}.`;
-    }
+  campoTieneError(campo: string): boolean {
+    const control = this.formGroup.get(campo);
+    return control?.invalid && control?.touched || false;
+  }
 
-    private getPeriodoSum(tiempo: number, periodo: string): number {
-      return tiempo * this.getValuePeriodoMeses(periodo, 'meses');
+  campoTieneErrorArray(campo: string, index: number): boolean {
+    const control = this.periodos.controls[index].get(campo);
+    return control?.invalid && control?.touched || false;
+  }
+
+  agregarNuevoCampo(){
+    this.formGroup.addControl('interes', new FormControl('', [Validators.required, Validators.min(4)]));
+  }
+  agregarPeriodo() {
+    if (this.formGroup.value.periodos.length <= 2) {
+      this.periodos.push(this.newPeriodo());
+      this.actualizarIntervalosDisponibles();
     }
   }
+  eliminarPeriodo(index: number) {
+    this.periodos.removeAt(index);
+    this.actualizarIntervalosDisponibles();
+  }
+  actualizarIntervalosDisponibles() {
+
+    const intervalosSeleccionados = this.periodos.controls?.map((formGroup_: any) => formGroup_.controls.periodo.value)
+    this.intervalosTiempo.forEach((intervalo) => {
+      intervalo.selected = intervalosSeleccionados.includes(intervalo.value);
+    });
+    }
+    calcularInteres() {
+      //debugger
+      console.log(this.formGroup?.valid);
+      //if (this.formGroup?.valid) {
+      if (true) {
+        this.interesTotalCalculado = this.interesCompuesto.calularInteresCompuesto(this.formGroup?.value)
+      } else {
+        // this.interesSimple.alertErrorMessage("Hay un campo vacio")
+      }
+    }
+}

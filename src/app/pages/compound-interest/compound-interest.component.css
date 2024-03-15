@@ -1,93 +1,112 @@
-/* compound-interest.component.css */
-.contenedor h1{
-    color: #2d3a3a; /* Color de texto oscuro */
-    font-size: 25px; /* Tamaño de fuente */
-    margin-bottom: 20px; /* Margen inferior para separar del contenido siguiente */
-    text-align: center; /* Alinea el texto al centro */
-    text-transform: uppercase; /* Convierte el texto a mayúsculas */
-    letter-spacing: 1px; /* Espaciado entre letras */
-    font-weight: bold; /* Negrita */
-}
-.contenedor {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alinea todo a la derecha */
+.container {
+    width: 400px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
     padding: 20px;
-    background-color: #a9e6c4; /* Color verde suave */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px; /* Ajusta el ancho máximo según sea necesario */
-    margin-left: 900px;
-    margin-top: 60px;
-  }
-  
-  .resultado {
-    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}
+
+.card-head {
+    background-color: #666666;
+    color: #ffffff;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-title {
     font-size: 18px;
-    color: #2d3a3a; /* Color de texto más oscuro */
-  }
-  
-  /* Estilos adicionales para hacerlo más atractivo */
-  .contenedor h2 {
-    color: #2d3a3a;
+    font-weight: bold;
     margin-bottom: 10px;
-  }
-  
-  button {
-    background-color: #5ca88e; /* Color verde más oscuro para el botón */
-    color: #fff; /* Texto en color blanco */
-    padding: 10px 15px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.google-button {
+    background-color: #4caf50;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 20px;
-    width: 70%;
-  }
-  
-  button:hover {
-    background-color: #4a7e69; /* Cambia el color al pasar el ratón sobre el botón */
-  }
-.campo{
     margin-bottom: 10px;
-  }
-  .campo label {
-    margin-bottom: 5px;
-  }
-  
-  .campo input {
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc; /* Borde gris claro */
-    width: 100%;
-    height: 40px;
-  }
-  .campo input:focus {
-    outline: none; /* Quita el borde al hacer clic en el campo */
-    border-color: #5ca88e; /* Cambia el color del borde al hacer clic en el campo */
 }
-.campoNumero{
-    margin-bottom: 10px;
-  }
-  .campoNumero label {
-    margin-bottom: 5px;
-  }
-  
-  .campoNumero input {
-    padding: 10px;
+
+.google-button:hover {
+    background-color: #388e3c;
+}
+
+.eliminar-button {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
     border-radius: 5px;
-    border: 1px solid #ccc; /* Borde gris claro */
-    width: 100%;
-  }
-  .campoNumero input:focus {
-    outline: none; /* Quita el borde al hacer clic en el campo */
-    border-color: #5ca88e; /* Cambia el color del borde al hacer clic en el campo */
+    padding: 10px 15px;
+    cursor: pointer;
 }
-/* app.component.css */
-.resultado-textarea {
-  background-color: #f0f0f0; /* Fondo gris */
-  color: #333; /* Color del texto */
-  border: 1px solid #ccc; /* Borde opcional */
-  width: 100%; /* Ajusta el ancho según tus necesidades */
-  height: 100px; /* Ajusta la altura según tus necesidades */
-  resize: none; /* Evita que el usuario redimensione el textarea */
+
+.eliminar-button:hover {
+    background-color: #cc0000;
+}
+
+.combo-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-label {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    color: #777;
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group input:focus + .form-label,
+.form-group input:not(:placeholder-shown) + .form-label {
+    top: 5px;
+    left: 7px;
+    font-size: 12px;
+    color: #4285f4;
+}
+
+.resultado-card {
+    margin-top: 20px;
+}
+.row-container{
+    display: flex;
+    flex-direction: row;
+}
+.imagen{
+    width: 500px;
+    height: 500px;
+    margin-left: 25%;
 }
