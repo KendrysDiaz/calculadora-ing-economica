@@ -78,7 +78,7 @@ export class InteresCompuestoServiceService {
     let base = (interes.monto / interes.capital);
     let exponente = (1 / sum);
     const T = Math.pow(base, exponente) - 1;
-    return  `La tasa de interes de para el monto de $${interes.monto} es de ${T.toFixed(3)} meses.`;
+    return  `La tasa de interes de para el monto de $${interes.monto} es de ${T.toFixed(3)}`;
      
   }
 
