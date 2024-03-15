@@ -123,9 +123,10 @@ export default class SimpleInterestsComponent {
     let result;
     if (tiempo > 1) {
       let years = Math.floor(tiempo);
-      let months = Math.round((tiempo - years) * 12);
-      result = `${years} años y ${months} meses`
-      this.time = 1;
+      let months = Math.floor((tiempo - years) * 12);
+      let days = Math.round((tiempo - years - months/12) * 365);
+      result = `${years} años, ${months} meses y ${days} días`;
+      this.time = 1
     } else {
       result = `${tiempo * 12} meses`
     }
@@ -137,9 +138,10 @@ export default class SimpleInterestsComponent {
     let result;
     if (tiempo > 1) {
       let years = Math.floor(tiempo);
-      let months = Math.round((tiempo - years) * 12);
-      result = `${years} años y ${months} meses`
-      this.time = 1;
+      let months = Math.floor((tiempo - years) * 12);
+      let days = Math.round((tiempo - years - months/12) * 365);
+      result = `${years} años, ${months} meses y ${days} días`;
+      this.time = 1
     } else {
       result = `${tiempo * 12} meses`
     }
