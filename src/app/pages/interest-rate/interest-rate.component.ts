@@ -143,7 +143,6 @@ export default class InterestRateComponent {
         if (this.namePeriodo != 'Periodo' && this.namePeriodo != undefined) {
           this.infoTasaAnualCuandoEsPeriodo = this.result.interesRateAnual;
         }
-
         this.vaciarCampos();
       }
 
