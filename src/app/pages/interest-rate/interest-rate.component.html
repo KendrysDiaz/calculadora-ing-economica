@@ -4,7 +4,7 @@
       <img
         src="assets/ImgFinanzas.png"
         alt="Imagen Finanzas"
-        style="width: 70%; height: auto"
+        style="width: 70%; height: auto;"
       />
     </div>
 
@@ -21,16 +21,16 @@
 
       <p class="text-lg pr-5 pl-5 text-black text-justify mx-12 mb-5">
         La
-        <span class="font-bold text-custom-green">{{
-          infoSeleccionada?.titulo
-        }}</span>
+        <span class="font-bold text-custom-green"
+          >{{ infoSeleccionada?.titulo }}</span
+        >
         {{ infoSeleccionada?.informacion }}
       </p>
       <img
         src="assets/formulas{{ infoSeleccionada?.url }}"
         class="bg-white opacity-90 rounded-xl"
         alt="Imagen Finanzas"
-        style="width: 75%; height: auto"
+        style="width: 75%; height: auto;"
       />
     </div>
   </div>
@@ -142,9 +142,9 @@
               rateMessage="{{ infoTasaFinal.numero }}"
               title="{{ infoTasaFinal.unidadDeTiempo }}"
               informacioExtra=" {{ infoTasaAnualCuandoEsPeriodo }}"
+              informacioExtra2=" {{tipoTiempoProvisional}}"
               unidadDeTiempo="{{ tiempo.unidadDeTiempo }}"
               [tipoTasa]="showContent()"
-      
             ></app-interest-ratemessage>
           </div>
         </section>
@@ -170,8 +170,8 @@
           >
             <h3 class="text-sm">Tiempo</h3>
             <h3 class="font-sm ml-4">
-              {{ tiempo.numero }}
-              {{ obtenerNombrePeriodo(tiempo.unidadDeTiempo) }}
+              {{ tiempo.numero }} {{ obtenerNombrePeriodo(tiempo.unidadDeTiempo)
+              }}
             </h3>
           </div>
         </section>
