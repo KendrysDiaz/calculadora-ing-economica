@@ -1,0 +1,41 @@
+<div id="campo_tasa">
+  <label class="block text-gray-800 mt-3 font-semibold text-sm"
+    >{{titulo}}</label
+  >
+  <div class="mt-2 flex gap-5">
+    <input
+      type="text"
+      name="inputname"
+      class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+      (change)="on_Change_input($event)"
+    />
+
+    <select
+      #selectElement
+      id=""
+      class="flex-grow input"
+      (change)="on_Periodo_Change($event); convertidor('TEA_TE?')"
+    >
+      <option value="">Periodo</option>
+      @for (periodo of periodos; track $index) {
+      <option [value]="periodo.nombre">
+        {{ periodo.nombre }}
+      </option>
+      }
+    </select>
+
+    @if (titulo=="Tasa interes nominal") {
+    <select
+      id=""
+      class="flex-grow input"
+      (change)="on_FrecuenciaCapitalizacion_Change($event);  convertidor('TN?_TE?')"
+    >
+      <option value="">Frecuencia de capitalizacion</option>
+      @for (periodo of periodos; track $index) {
+      <option [value]="periodo.nombre">
+        {{ periodo.nombre }}
+      </option>
+      } </select
+    >}
+  </div>
+</div>
