@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { InputComponent } from '../../shared/input/input.component';
 import { TimeCheckComponent } from '../../shared/time-check/time-check.component';
-import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-simple-interests',
