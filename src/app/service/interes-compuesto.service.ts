@@ -68,7 +68,7 @@ export class InteresCompuestoServiceService {
 
   private calcularMonto(interes:any):string {
     let sum = this.getPeriodoSum(interes.periodos, 'meses');
-    let base = (1 + interes.tasaInteres / 100);
+    let base = (1 + interes.tasaInteres / 100/12);
     let reult = Math.pow(base, sum);
     const mc = (interes.capital * reult);
     return `El monto compuesto durante ${sum} meses es  $${Math.round(mc)} mensual`;
