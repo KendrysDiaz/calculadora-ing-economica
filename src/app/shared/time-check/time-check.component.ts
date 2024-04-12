@@ -70,7 +70,7 @@ export class TimeCheckComponent {
           this.tipoDeTiempo = 'Semanal';
         }
       } else if (year === 0 && month === 0 && week === 0 && day > 0) {
-        this.time = day / 360;
+        this.time = day / 365;
         if (!this.tipoTasaSeleccionada && this.tipoBotton == 'TasaInteres') {
           this.time = day;
           this.tipoDeTiempo = 'Diario';
@@ -80,23 +80,23 @@ export class TimeCheckComponent {
       } else if (year > 0 && month === 0 && week > 0 && day === 0) {
         this.time = year + week / 52;
       } else if (year > 0 && month === 0 && week === 0 && day > 0) {
-        this.time = year + day / 360;
+        this.time = year + day / 365;
       } else if (year === 0 && month > 0 && week > 0 && day === 0) {
         this.time = month / 12 + week / 52;
       } else if (year === 0 && month > 0 && week === 0 && day > 0) {
-        this.time = month / 12 + day / 360;
+        this.time = month / 12 + day / 365;
       } else if (year === 0 && month === 0 && week > 0 && day > 0) {
-        this.time = week / 52 + day / 360;
+        this.time = week / 52 + day / 365;
       } else if (year > 0 && month > 0 && week > 0 && day === 0) {
         this.time = year + month / 12 + week / 52;
       } else if (year > 0 && month > 0 && week === 0 && day > 0) {
-        this.time = year + month / 12 + day / 360;
+        this.time = year + month / 12 + day / 365;
       } else if (year > 0 && month === 0 && week > 0 && day > 0) {
-        this.time = year + week / 52 + day / 360;
+        this.time = year + week / 52 + day / 365;
       } else if (year === 0 && month > 0 && week > 0 && day > 0) {
-        this.time = month / 12 + week / 52 + day / 360;
+        this.time = month / 12 + week / 52 + day / 365;
       } else if (year > 0 && month > 0 && week > 0 && day > 0) {
-        this.time = year + month / 12 + week / 52 + day / 360;
+        this.time = year + month / 12 + week / 52 + day / 365;
       }
     } else if (this.page === 2) {
       this.tipoDeTiempo = 'Anual';
@@ -104,7 +104,7 @@ export class TimeCheckComponent {
       let fecha2 = new Date(this.dateFinish);
       let diferenciaEnTiempo = Math.abs(fecha2.getTime() - fecha1.getTime());
       let diferenciaEnDias = Math.ceil(diferenciaEnTiempo / (1000 * 3600 * 24));
-      this.time = diferenciaEnDias / 360;
+      this.time = diferenciaEnDias / 365;
     } else if (this.page === 3) {
       let equivalencia = '';
       for (const periodo of this.periodos) {
@@ -117,7 +117,7 @@ export class TimeCheckComponent {
       if (unidad === 'meses') {
         this.time = this.nPeriodos * (numero / 12);
       } else if (unidad === 'dias') {
-        this.time = this.nPeriodos * (numero / 360);
+        this.time = this.nPeriodos * (numero / 365);
       } else {
         this.time = this.nPeriodos * numero;
       }

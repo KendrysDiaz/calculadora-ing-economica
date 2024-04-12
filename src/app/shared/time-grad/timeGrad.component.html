@@ -1,0 +1,34 @@
+<div>
+  <div>
+    <label for="cuota">Cuota</label>
+    <input type="radio" name="option" id="cuota" (change)="seleccion='Cuota'">
+    <label for="tiempo">Tiempo</label>
+    <input type="radio" name="option" id="tiempo" (change)="seleccion='Tiempo'">
+  </div>
+  @if (seleccion == 'Cuota') {
+    <input type="number" name="" id="">
+    <select name="" id="">
+      <option value=""></option>
+      <option value="">Anual</option>
+      <option value="">Mensual</option>
+      <option value="">Bimensual</option>
+      <option value="">Trimestral</option>
+    </select>
+  } @else if (seleccion === 'Tiempo'){
+    <input type="number" name="" id="">
+    <select name="" id="">
+      <option value=""></option>
+      <option value="">Años</option>
+      <option value="">Meses</option>
+      <option value="">Trimestres</option>
+    </select>
+  }
+  <input placeholder="Tasa de interes" type="number" name="" id="">
+  <select name="" id="">
+    <option value=""></option>
+    <option value="">Anual</option>
+    <option value="">Mensual</option>
+    <option value="">Bimensual</option>
+    <option value="">Trimestral</option>
+  </select>
+</div>

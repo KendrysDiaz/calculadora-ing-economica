@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { InputComponent } from '../../shared/input/input.component';
 import { TimeCheckComponent } from '../../shared/time-check/time-check.component';
-import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-simple-interests',
@@ -122,10 +121,18 @@ export default class SimpleInterestsComponent {
     let tiempo = ((this.monto / this.capital) - 1) / this.tasainteres;
     let result;
     if (tiempo > 1) {
+      let months;
       let years = Math.floor(tiempo);
-      let months = Math.round((tiempo - years) * 12);
-      result = `${years} años y ${months} meses`
-      this.time = 1;
+      let monthsP = ((tiempo - years) * 12);
+      if (monthsP >= 1.9 && monthsP < 2) {
+        months = Math.round((tiempo - years) * 12);
+      } else {
+        months = Math.floor((tiempo - years) * 12);
+      }
+      let days = Math.round((tiempo - years - months/12) * 365);
+      console.log(tiempo)
+      result = `${years} años, ${months} meses y ${days} días`;
+      this.time = 1
     } else {
       result = `${tiempo * 12} meses`
     }
@@ -136,10 +143,17 @@ export default class SimpleInterestsComponent {
     let tiempo = this.interes / (this.capital * this.tasainteres);
     let result;
     if (tiempo > 1) {
+      let months;
       let years = Math.floor(tiempo);
-      let months = Math.round((tiempo - years) * 12);
-      result = `${years} años y ${months} meses`
-      this.time = 1;
+      let monthsP = ((tiempo - years) * 12);
+      if (monthsP >= 1.9 && monthsP < 2) {
+        months = Math.round((tiempo - years) * 12);
+      } else {
+        months = Math.floor((tiempo - years) * 12);
+      }
+      let days = Math.round((tiempo - years - months/12) * 365);
+      result = `${years} años, ${months} meses y ${days} días`;
+      this.time = 1
     } else {
       result = `${tiempo * 12} meses`
     }

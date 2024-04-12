@@ -1,0 +1,94 @@
+<!-- POT -->
+<div class="min-h-screen bg-gray-100 flex justify-center items-center">
+  <div
+    class="w- p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500"
+  >
+    <div class="">
+      <h1 class="text-2xl font-bold text-gray-700 text-center">Tasa Interes</h1>
+
+      <app-interest-rate-converter-input
+        (tasa_interes_efectiva_calculada)="recibirTasaEfectiva($event)"
+        titulo="Tasa interes efectiva periodica"
+      ></app-interest-rate-converter-input>
+      <label class="pt-1 block text-gray-500 text-sm mt-2 text-center"
+        >¿Necesita Conversion?</label
+      >
+      <hr class="mt-3" />
+      <!-- component -->
+      <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+        <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto">
+          <div class="py-5">
+            <details class="group">
+              <summary
+                class="flex justify-between text-gray-500 items-center text-sm cursor-pointer list-none"
+              >
+                <span>Tasa efectiva a tasa efectiva</span>
+                <span class="transition group-open:rotate-180">
+                  <svg
+                    fill="none"
+                    height="24"
+                    shape-rendering="geometricPrecision"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </summary>
+              <div class="space-x-4 flex p-1">
+                <app-interest-rate-converter-input
+                  (tasa_interes_efectiva_calculada)="recibirTasaEfectiva($event)"
+                  titulo="Tasa efectiva anual"
+                ></app-interest-rate-converter-input>
+              </div>
+            </details>
+            <div class="mt-2"></div>
+            <details class="group">
+              <summary
+                class="flex justify-between text-gray-500 items-center text-sm cursor-pointer list-none"
+              >
+                <span>Tasa nominal a tasa efectiva </span>
+                <span class="transition group-open:rotate-180">
+                  <svg
+                    fill="none"
+                    height="24"
+                    shape-rendering="geometricPrecision"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    width="24"
+                  >
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </summary>
+              <div class="space-x-4 flex p-1">
+                <app-interest-rate-converter-input
+                  (tasa_interes_efectiva_calculada)="recibirTasaEfectiva($event)"
+                  titulo="Tasa interes nominal"
+                ></app-interest-rate-converter-input>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 mb-2 flex justify-between pl-4 pr-2 gap-3">
+        <h2 class="block text-xl font-semibold text-gray-700 cursor-auto">
+          {{(tasa_interes_efectiva_periodica*100).toFixed(2)}} %
+        </h2>
+        <button
+          class="text-lg block font-semibold py-2 px-6 text-green-100 hover:text-white bg-green-400 rounded-lg shadow hover:shadow-md transition duration-300"
+        >
+          Listo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

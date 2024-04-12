@@ -18,7 +18,6 @@ export class InterestRateSimpleService {
     const timeAnual = interestRate.timeAnual;
     const timePeriodo = interestRate.timePeriodo;
 
-    console.log('Tiempo seleccionado: ', timeAnual);
     //Valores de salida
     let resultPresentValue: number = 0;
     let resultFinalValue: number = 0;
@@ -28,13 +27,11 @@ export class InterestRateSimpleService {
     let resultadoInteresFinal: number;
     let resultadoTiempoFinal: any;
 
-    console.log(timePeriodo);
     if (finalValue != null && presentValue != null) {
       resultFinalValue = finalValue;
       resultPresentValue = presentValue;
       resultInterest = finalValue - presentValue;
-      resultInterestRateAnual =
-        ((finalValue / presentValue - 1) / timeAnual) * 100;
+      resultInterestRateAnual = ((finalValue / presentValue - 1) / timeAnual) * 100;
       if (timePeriodo > 0) {
         resultInterestRatePeriodo =
           ((finalValue / presentValue - 1) / timePeriodo) * 100;

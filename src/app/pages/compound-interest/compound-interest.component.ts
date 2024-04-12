@@ -1,6 +1,6 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
-import { Component, input } from "@angular/core";
+import { Component } from "@angular/core";
 import { InteresCompuestoServiceService } from "../../service/interes-compuesto.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { InteresCompuestoServiceService } from "../../service/interes-compuesto.
   standalone: true,
   templateUrl: './compound-interest.component.html',
   styleUrls: ['./compound-interest.component.css'],
-  imports: [ ReactiveFormsModule, ]
+  imports: [ ReactiveFormsModule ]
 })
 
 
