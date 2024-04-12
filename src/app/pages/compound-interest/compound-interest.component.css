@@ -8,6 +8,7 @@
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+    overflow-y: auto;
 }
 
 .card {
@@ -104,9 +105,12 @@
 .row-container{
     display: flex;
     flex-direction: row;
+    
+    
 }
 .imagen{
     width: 500px;
     height: 500px;
     margin-left: 25%;
 }
+

@@ -68,11 +68,12 @@ export class InteresCompuestoServiceService {
 
   private calcularMonto(interes:any):string {
     let sum = this.getPeriodoSum(interes.periodos, 'meses');
-    let base = (1 + interes.tasaInteres / 100/12);
+    let base = (1 + (interes.tasaInteres / 100)/12);
     let reult = Math.pow(base, sum);
     const mc = (interes.capital * reult);
     return `El monto compuesto durante ${sum} meses es  $${Math.round(mc)} mensual`;
   }
+
   private calcularTasaInteres(interes: any):string {
     let sum = this.getPeriodoSum(interes.periodos, 'meses');
     let base = (interes.monto / interes.capital);
@@ -83,13 +84,13 @@ export class InteresCompuestoServiceService {
   }
 
   private CalcularPeriodo(interes: any) {
-    const N = (Math.log10(interes.monto) - Math.log10(interes.capital)) / Math.log10(1 + interes.tasaInteres / 100);
+    const N = (Math.log10(interes.monto) - Math.log10(interes.capital)) / Math.log10(1 + interes.tasaInteres / 100/12);
     return `El tiempo requerido para alcanzar un monto de $${interes.monto} es de ${Math.round(N)} meses.`;
   }
 
   private CalcularCapital(interes: any): string {
     let suma = this.getPeriodoSum(interes.periodos, '');
-    let base_ = (1 + (interes.tasaInteres / 100));
+    let base_ = (1 + (interes.tasaInteres / 100/12));
     let result = Math.pow(base_, suma);
     const c = interes.monto / result;
     return `Su capital inicial es de $${Math.round(c)}.`;
