@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 @Component({
-  selector: 'app-input',
+  selector: "app-input",
   standalone: true,
   imports: [],
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.css',
+  templateUrl: "./input.component.html",
+  styleUrls: ["../styles/input.style.css"],
 })
 export class InputComponent {
   @Input() title!: string;
@@ -19,7 +19,8 @@ export class InputComponent {
   onValorChange() {
     this.valorChange.emit(this.valor);
   }
-  clear(){
+
+  clear() {
     this.valorChange.emit(this.valor);
   }
 }

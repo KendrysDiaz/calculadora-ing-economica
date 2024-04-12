@@ -1,0 +1,9 @@
+.input-style {
+  background-color: #f5f5f5;
+  padding: 0.15rem 0.5rem;
+  min-height: 40px;
+  line-height: 1.15;
+  box-shadow: 0px 10px 20px -18px;
+  border-bottom: 3px solid #38a169;
+  border-radius: 0;
+}

@@ -1,0 +1,6 @@
+<swiper-container loop="true" pagination="true">
+  @for (item of imagenes; track $index) { @if
+  (item.toLowerCase().includes(tipo.toLowerCase())) {
+  <swiper-slide><img src="{{item}}" alt="" loading="lazy" /></swiper-slide>
+  } }
+</swiper-container>

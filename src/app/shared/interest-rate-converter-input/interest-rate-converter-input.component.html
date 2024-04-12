@@ -14,7 +14,7 @@
       #selectElement
       id=""
       class="flex-grow input"
-      (change)="on_Periodo_Change($event); convertidor('TEA_TE?')"
+      (change)="on_Periodo_Change($event); convertidor(titulo)"
     >
       <option value="">Periodo</option>
       @for (periodo of periodos; track $index) {

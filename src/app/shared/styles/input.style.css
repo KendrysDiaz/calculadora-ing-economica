@@ -1,4 +1,4 @@
-.input {
+.inputStyle {
   background-color: #f5f5f5;
   color: #242424;
   padding: 0.15rem 0.5rem;
@@ -11,11 +11,11 @@
   border-bottom: 3px solid #38a169;
 }
 
-input:focus {
+inputStyle:focus {
   border-bottom: 4px solid #38a169;
   border-radius: 4px 4px 2px 2px;
 }
 
-input:hover {
+inputStyle:hover {
   outline: 1px solid lightgrey;
 }

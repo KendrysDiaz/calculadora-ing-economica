@@ -1,1 +1,142 @@
-<app-interest-rate-converter></app-interest-rate-converter>
+<div class="flex">
+  @if (showModal) {
+  <app-interest-rate-converter
+    (estado)="recibirEstado($event)"
+    (tasa_interes_efectiva_calculada)="recibirTasaEfectiva($event)"
+  ></app-interest-rate-converter>
+  }
+  <div class="w-1/2 h-screen relative">
+    <div class="ml-20 pl-12 mt-5">
+      <app-carrousel [tipo]="valorSeleccionado"></app-carrousel>
+    </div>
+  </div>
+  <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100">
+    <div class="justify-center items-center flex">
+      <div class="radio-inputs mb-5">
+        <label class="radio">
+          <input
+            type="radio"
+            name="radio"
+            [checked]="valorSeleccionado === 'Vencida'"
+            (change)="onRadioChange('Vencida')"
+          />
+          <span class="name">Vencida</span>
+        </label>
+
+        <label class="radio">
+          <input
+            type="radio"
+            name="radio"
+            [checked]="valorSeleccionado === 'Diferida'"
+            (change)="onRadioChange('Diferida')"
+          />
+          <span class="name">Diferida</span>
+        </label>
+        <label class="radio">
+          <input
+            type="radio"
+            name="radio"
+            [checked]="valorSeleccionado === 'Anticipada'"
+            (change)="onRadioChange('Anticipada')"
+          />
+          <span class="name">Anticipada</span>
+        </label>
+      </div>
+    </div>
+    <form [formGroup]="annuities_Form" class="ml-5 mt-3 mr-10">
+      <div class="flex gap-4 justify-between mb-3">
+        <h3 class="text-base text-black font-semibold">Valor presente</h3>
+        <input
+          formControlName="valor_presente"
+          id="valor_presente"
+          class="input-style w-3/4"
+          type="number"
+          name="valor_presente"
+        />
+      </div>
+
+      <div class="flex gap-4 justify-between mb-3">
+        <h3 class="text-base text-black font-semibold">Valor final</h3>
+        <input
+          formControlName="valor_final"
+          id="valor_final"
+          class="input-style w-3/4"
+          type="number"
+          name="valor_final"
+        />
+      </div>
+
+      <div class="flex gap-4 justify-between mb-3">
+        <h3 class="text-base text-black font-semibold">Cuota</h3>
+        <input
+          formControlName="renta"
+          id="renta"
+          class="input-style w-3/4"
+          type="number"
+          name="renta"
+        />
+      </div>
+
+      <div class="flex gap-4 justify-between mb-3">
+        <h3 class="text-base text-black font-semibold">Tasa</h3>
+        <button class="inputStyle w-9/12" (click)="showContent($event)">
+          @if (annuities_Form.get("tasa_interes_efectiva")?.value!=0) {
+          {{(annuities_Form.get("tasa_interes_efectiva")?.value*100).toFixed(2)}}%
+          }@else {click}
+        </button>
+      </div>
+
+      <div class="flex">
+        <input
+          placeholder="Numero periodos"
+          formControlName="num_periodos"
+          id="num_periodos"
+          class="input-style w-3/4"
+          type="number"
+          name="num_periodos"
+        />
+
+        @if (valorSeleccionado=="Diferida") {
+
+        <input
+          placeholder="Numero periodos"
+          formControlName="num_periodos_gracia"
+          id="num_periodos_gracia"
+          class="input-style w-3/4"
+          type="number"
+          name="num_periodos_gracia"
+        />
+        }
+
+        <select id="" class="input-style" (change)="on_Periodo_Change($event)">
+          <option value="">Periodo</option>
+          @for (periodo of periodos; track $index) {
+          <option [value]="periodo.nombre">
+            {{ periodo.nombre }}
+          </option>
+          }
+        </select>
+        @if (valorSeleccionado!="Diferida") {
+        <button
+          class="transform button-transition w-full ml-2 bg-green-800 text-white p-2 rounded-md"
+          (click)="enviar($event)"
+        >
+          Calcular
+        </button>
+        }
+      </div>
+
+      @if (valorSeleccionado=="Diferida") {
+      <button
+        class="transform w-full bg-green-800 mt-2 text-white p-2 rounded-md"
+        (click)="enviar($event)"
+      >
+        Calcular
+      </button>
+      }
+    </form>
+    <div class="w-full p-5 rounded-md">
+      <h3 class="text-xl text-green-950 justify-between">{{resultado}}</h3>
+    </div>
+  </div>
+</div>

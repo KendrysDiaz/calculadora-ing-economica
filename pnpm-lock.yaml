@@ -35,12 +35,18 @@ dependencies:
   bootstrap:
     specifier: ^5.3.3
     version: 5.3.3(@popperjs/core@2.11.8)
+  flowbite:
+    specifier: 1.4.0
+    version: 1.4.0
   jquery:
     specifier: ^3.7.1
     version: 3.7.1
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
+  swiper:
+    specifier: ^11.1.1
+    version: 11.1.1
   tslib:
     specifier: ^2.3.0
     version: 2.6.2
@@ -4096,6 +4102,12 @@ packages:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
     dev: true
 
+  /flowbite@1.4.0:
+    resolution: {integrity: sha512-iObVwB5J9i+E29XLwsDeEj0a2FgATYqLb9bgCpf3iHBG7/EguC/QPBr5Kdcpmjko+wPk7appB8mcM4xzk2B5kQ==}
+    dependencies:
+      '@popperjs/core': 2.11.8
+    dev: false
+
   /follow-redirects@1.15.5:
     resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
     engines: {node: '>=4.0'}
@@ -6757,6 +6769,11 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /swiper@11.1.1:
+    resolution: {integrity: sha512-jGmEA/fNz1lACIcY4/40ggm1Gcyv+EUivmgV/Jd2WFPsEJhbWXnRAwzZR8OPjkBLtDxmzcoYG/iiAMWfRs0YKQ==}
+    engines: {node: '>= 4.7.0'}
+    dev: false
 
   /symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
