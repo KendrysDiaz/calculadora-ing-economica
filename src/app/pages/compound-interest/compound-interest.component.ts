@@ -47,7 +47,8 @@ export default class CompoundInterestComponent {
         periodos: this.fb.array([]),
         capital: new FormControl('', Validators.required),
         tasaInteres: new FormControl('', Validators.required),
-        monto: new FormControl('', [Validators.required])
+        monto: new FormControl('', [Validators.required]),
+        capitalizacion: new FormControl('', Validators.required),
       });
 
   }
