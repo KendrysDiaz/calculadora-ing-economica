@@ -11,7 +11,6 @@ export class AnnutiesAnticipadasFunctionsService {
   ) {}
 
   busqueda_valores_futuro_presente(info: annuitiesInterface): any {
-    console.log("hACINEO");
     let val_1 = this.buscar_valor_futuro(info);
     let val_2 = this.buscar_valor_presente(info);
 

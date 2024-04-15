@@ -7,12 +7,6 @@ export const routes: Routes = [
     loadComponent: () => import("../app/pages/home/home.component"),
     children: [
       {
-        path: "presentacion",
-        title: "Presentacion",
-        loadComponent: () =>
-          import("../app/shared/teamwork/teamwork.component"),
-      },
-      {
         path: "interest-rate",
         title: "Tasa Interes",
         loadComponent: () =>
@@ -37,11 +31,17 @@ export const routes: Routes = [
         loadComponent: () =>
           import("../app/pages/annuities/annuities.component"),
       },
+      {
+        path: "gradient",
+        title: "Gradientes",
+        loadComponent: () =>
+          import("../app/pages/gradient/gradient.component"),
+      }
     ],
   },
   {
     path: "",
-    redirectTo: "/dashboard/presentacion",
+    redirectTo: "/dashboard/interest-rate",
     pathMatch: "full",
   },
 ];

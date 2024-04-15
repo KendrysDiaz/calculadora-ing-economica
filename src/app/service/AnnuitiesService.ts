@@ -5,6 +5,7 @@ import { AnnutiesAnticipadasFunctionsService } from "./annuties_functions/annuti
 import { AnnutiesFunctionsDiferidasAnticipadaService } from "./annuties_functions/annuties-functions-diferidas-anticipada.service";
 import { AnnutiesFunctionsDiferidasVencidasService } from "./annuties_functions/annuties-functions-diferidas-vencidas.service";
 
+
 @Injectable({
   providedIn: "root",
 })
@@ -21,59 +22,51 @@ export class AnnuitiesService {
     private anticipadas_services: AnnutiesAnticipadasFunctionsService,
     private diferidas_anticipadas: AnnutiesFunctionsDiferidasAnticipadaService,
     private diferidas_vencidas: AnnutiesFunctionsDiferidasVencidasService
-  ) {}
+  ) { }
 
   solution_anualidad(
     info: annuitiesInterface,
     diferida: boolean,
-    tipo_diferida: string
+    tipo_diferida: boolean
   ): any {
-    console.log("Entro a solution anulidad");
     let tipo = info.tipo_anualidad;
-    console.log("tipo anualidad", tipo);
-    //  true para diferida
-    console.log("Es diferida: ", diferida);
+    let valor = [];
+
     if (diferida) {
       switch (tipo) {
         case "Anticipada":
-          return this.anticipada(info);
+          valor = this.anticipada(info);
+          break;
         case "Vencida":
-          return this.vencida(info);
+          valor = this.vencida(info);
+          break;
+
         default:
           break;
       }
+      return valor;
     } else {
-      if (tipo == "Diferida") {
-        console.log("Entro al if del diferida");
-        return this.diferida(info, tipo_diferida);
-      }
+      diferida(info, tipo_diferida);
     }
-    return "";
   }
 
   vencida(info: annuitiesInterface): any {
-    if (
-      info.valor_final == 0 &&
+    if (info.valor_final == 0 &&
       info.num_periodos != 0 &&
       info.renta != 0 &&
-      info.valor_presente == 0
-    ) {
+      info.valor_presente == 0) {
       //listo
       return this.vencidas_services.busqueda_valores_futuro_presente(info);
-    } else if (
-      info.valor_final != 0 &&
+    } else if (info.valor_final != 0 &&
       info.num_periodos == 0 &&
       info.renta != 0 &&
-      info.valor_presente == 0
-    ) {
+      info.valor_presente == 0) {
       //listo
       return this.vencidas_services.buscar_valor_numero_periodos(info);
-    } else if (
-      info.valor_final == 0 &&
+    } else if (info.valor_final == 0 &&
       info.num_periodos != 0 &&
       info.renta == 0 &&
-      info.valor_presente != 0
-    ) {
+      info.valor_presente != 0) {
       //listo
       return this.vencidas_services.buscar_valor_renta(info);
     }
@@ -82,90 +75,74 @@ export class AnnuitiesService {
 
   anticipada(info: annuitiesInterface): any {
     console.log("Entro", info);
-    if (
-      info.valor_final == 0 &&
+    if (info.valor_final == 0 &&
       info.num_periodos != 0 &&
       info.renta != 0 &&
-      info.valor_presente == 0
-    ) {
+      info.valor_presente == 0) {
       //lista
       return this.anticipadas_services.busqueda_valores_futuro_presente(info);
-    } else if (
-      info.valor_final != 0 &&
+    } else if (info.valor_final != 0 &&
       info.num_periodos == 0 &&
       info.renta != 0 &&
-      info.valor_presente != 0
-    ) {
+      info.valor_presente != 0) {
       return this.anticipadas_services.buscar_valor_numero_periodos(info);
-    } else if (
-      info.valor_final == 0 &&
+    } else if (info.valor_final == 0 &&
       info.num_periodos != 0 &&
       info.renta == 0 &&
-      info.valor_presente != 0
-    ) {
+      info.valor_presente != 0) {
       //listo
       return this.anticipadas_services.buscar_valor_renta(info);
     }
     return 0;
   }
 
-  diferida(info: annuitiesInterface, tipo_diferida: string) {
-    //false para vencida
-    if (
-      info.valor_presente == 0 &&
+  diferida(info: annuitiesInterface, tipo_diferida: boolean) {
+    //true para vencida
+    if (info.valor_presente == 0 &&
       info.tasa_interes_efectiva != 0 &&
       info.num_periodos != 0 &&
       info.num_periodos_gracia != 0 &&
       info.renta != 0 &&
-      info.valor_final == 0
-    ) {
+      info.valor_final == 0) {
       //buscamos el valor presente
-
-      if (tipo_diferida == "Anticipada") {
+      let Resultado: any;
+      if (tipo_diferida) {
         return this.diferidas_anticipadas.busqueda_presente_anticipada(info);
       } else {
         return this.diferidas_vencidas.busqueda_presente_vencida(info);
       }
-    } else if (
-      info.valor_presente != 0 &&
+    } else if (info.valor_presente != 0 &&
       info.tasa_interes_efectiva != 0 &&
       info.num_periodos != 0 &&
       info.num_periodos_gracia != 0 &&
       info.renta == 0 &&
-      info.valor_final == 0
-    ) {
+      info.valor_final == 0) {
       //buscamos el renta
-      if (tipo_diferida == "Anticipada") {
+      if (tipo_diferida) {
         return this.diferidas_anticipadas.busqueda_renta_anticipada(info);
       } else {
         return this.diferidas_vencidas.busqueda_renta_vencida(info);
       }
-    } else if (
-      info.valor_presente != 0 &&
+    } else if (info.valor_presente != 0 &&
       info.tasa_interes_efectiva != 0 &&
       info.num_periodos == 0 &&
       info.num_periodos_gracia != 0 &&
       info.renta != 0 &&
-      info.valor_final == 0
-    ) {
+      info.valor_final == 0) {
       //buscamos el numero de periodos
-
-      if (tipo_diferida == "Anticipada") {
+      if (tipo_diferida) {
         return this.diferidas_anticipadas.busqueda_periodos_anticipada(info);
       } else {
         return this.diferidas_vencidas.busqueda_periodos_vencida(info);
       }
-    } else if (
-      info.valor_presente != 0 &&
+    } else if (info.valor_presente != 0 &&
       info.tasa_interes_efectiva != 0 &&
       info.num_periodos != 0 &&
       info.num_periodos_gracia == 0 &&
       info.renta != 0 &&
-      info.valor_final == 0
-    ) {
+      info.valor_final == 0) {
       //buscamos el numero de periodos de gracia
-
-      if (tipo_diferida == "Anticipada") {
+      if (tipo_diferida) {
         return this.diferidas_anticipadas.busqueda_periodos_gracia_anticipada(
           info
         );

@@ -43,6 +43,35 @@
         </label>
       </div>
     </div>
+
+    @if (valorSeleccionado=="Diferida") {
+
+
+    <div class="flex justify-between mb-5 ml-20 mr-20">
+      <label class="segundo-radio">
+        <input
+          type="radio"
+          name="radio"
+          [checked]="valorSeleccionado_2 === ' Anticipada'"
+          (change)="onRadioChange_2('Anticipada')"
+        />
+        <span class="segundo-class-radio"></span>
+        Anticipada
+      </label>
+
+      <label class="segundo-radio">
+        <input
+          type="radio"
+          name="radio"
+          [checked]="valorSeleccionado_2 === 'Vencida'"
+          (change)="onRadioChange_2('Vencida')"
+        />
+        <span class="segundo-class-radio"></span>
+        Vencida
+      </label>
+    </div>
+
+    }
     <form [formGroup]="annuities_Form" class="ml-5 mt-3 mr-10">
       <div class="flex gap-4 justify-between mb-3">
         <h3 class="text-base text-black font-semibold">Valor presente</h3>
@@ -87,28 +116,37 @@
       </div>
 
       <div class="flex">
-        <input
-          placeholder="Numero periodos"
-          formControlName="num_periodos"
-          id="num_periodos"
-          class="input-style w-3/4"
-          type="number"
-          name="num_periodos"
-        />
+        <div>
+          <h5 class="text-sm text-gray-600 mb-1">Numero periodos</h5>
+          <input
+            placeholder="Numero periodos"
+            formControlName="num_periodos"
+            id="num_periodos"
+            class="input-style w-3/4"
+            type="number"
+            name="num_periodos"
+          />
+        </div>
 
         @if (valorSeleccionado=="Diferida") {
-
-        <input
-          placeholder="Numero periodos"
-          formControlName="num_periodos_gracia"
-          id="num_periodos_gracia"
-          class="input-style w-3/4"
-          type="number"
-          name="num_periodos_gracia"
-        />
+        <div>
+          <h5 class="text-sm text-gray-600 mb-1">Periodos muertos</h5>
+          <input
+            placeholder="Numero periodos GraciasS"
+            formControlName="num_periodos_gracia"
+            id="num_periodos_gracia"
+            class="input-style w-3/4"
+            type="number"
+            name="num_periodos_gracia"
+          />
+        </div>
         }
 
-        <select id="" class="input-style" (change)="on_Periodo_Change($event)">
+        <select
+          id=""
+          class="input-style mt-5"
+          (change)="on_Periodo_Change($event)"
+        >
           <option value="">Periodo</option>
           @for (periodo of periodos; track $index) {
           <option [value]="periodo.nombre">
@@ -118,7 +156,7 @@
         </select>
         @if (valorSeleccionado!="Diferida") {
         <button
-          class="transform button-transition w-full ml-2 bg-green-800 text-white p-2 rounded-md"
+          class="transform button-transition w-1/2 mt-5 ml-2 bg-green-800 text-white p-2 rounded-md"
           (click)="enviar($event)"
         >
           Calcular

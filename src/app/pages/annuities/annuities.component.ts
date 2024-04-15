@@ -1,5 +1,5 @@
 import { AnnuitiesService } from "./../../service/annuities.service";
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { InputComponent } from "../../shared/input/input.component";
 import { InterestRateConverterComponent } from "../../shared/interest-rate-converter/interest-rate-converter.component";
 import { annuitiesInterface } from "../../interface/annuities.interface";
@@ -26,11 +26,13 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 export default class AnnuitiesComponent {
   tasa_interes_efectiva: number = 0;
   showModal: boolean = false;
-  valorSeleccionado: string = "Vencida"; // Propiedad para almacenar el valor seleccionado
+  valorSeleccionado: string = "Vencida";
+  valorSeleccionado_2: string = "Vencida"; // Propiedad para almacenar el valor seleccionado
   resultado: number = 0;
   periodos: { nombre: string; equivalencia: number }[];
   annuities_Form: FormGroup;
-
+  diferida: any = false;
+  tipo_diferidad: any = true;
   constructor(
     private annuitiesService: AnnuitiesService,
     private lista_periodos: AnnutiesConvertionTimeFunctionsService
@@ -113,14 +115,22 @@ export default class AnnuitiesComponent {
 
   onRadioChange(valor: string) {
     this.valorSeleccionado = valor;
-    this.annuities_Form.get("tipo_anualidad")?.setValue(valor);
+    this.annuities_Form.get("tipo_anualidad")?.setValue(this.valorSeleccionado);
     this.limpiarCampos();
   }
 
+  onRadioChange_2(valor: string) {
+    this.valorSeleccionado_2 = valor;
+  }
+
   enviar(event: Event) {
+    this.diferida = false;
     event.preventDefault();
+    this.annuities_Form.get("tipo_anualidad")?.setValue(this.valorSeleccionado);
     this.resultado = this.annuitiesService.solution_anualidad(
-      this.annuities_Form.value
+      this.annuities_Form.value,
+      this.diferida,
+      this.tipo_diferidad
     );
   }
 }

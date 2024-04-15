@@ -8,9 +8,18 @@ import { AnnutiesConvertionTimeFunctionsService } from "./annuties-convertion-ti
 export class AnnutiesDiferidaFunctionsService {
   constructor(
     private convertion_time: AnnutiesConvertionTimeFunctionsService
-  ) {}
+  ) {
 
-  busqueda_valores_futuro_presente(info: annuitiesInterface): any {
+
+    
+
+  }
+}
+
+/*
+    /*seguna formula  */
+
+/*  busqueda_valores_futuro_presente(info: annuitiesInterface): any {
     let val_1 = this.buscar_valor_futuro(info);
     let val_2 = this.buscar_valor_presente(info);
 
@@ -105,8 +114,4 @@ export class AnnutiesDiferidaFunctionsService {
 
   buscar_valor_numero_periodos(info: annuitiesInterface): any {
     return 0;
-  }
-}
-
-/*
-    /*seguna formula  */
+  } */
