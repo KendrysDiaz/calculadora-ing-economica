@@ -183,6 +183,7 @@ export class InteresCompuestoServiceService {
     switch (interes.capitalizacion) {
       case 'anual':
           capitalizacion = 1;
+      
           break;
       case 'semestral':
           capitalizacion = 2;
@@ -195,6 +196,7 @@ export class InteresCompuestoServiceService {
           break;
       case 'mensual':
           capitalizacion = 12;
+          
           break;
       // Agrega otros casos según sea necesario
   }

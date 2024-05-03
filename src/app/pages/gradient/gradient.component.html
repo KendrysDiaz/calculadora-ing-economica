@@ -1,47 +1,129 @@
-<div class="flex max-h-full pt-5 pl-24 pr-6 justify-center items-center h-screen bg-[url('/assets/fondoInteres.svg')] bg-cover bg-bottom ">
+<div class="flex max-h-full pt-5 pl-24 pr-6 justify-center items-center h-screen bg-[url('/assets/fondo2.jpg')] bg-cover bg-bottom ">
     <div class="w-1/2 relative">
       <!-- Contenedor de información -->
       <div class="w-full flex flex-col justify-center items-center text-white">
         <!-- Título -->
-        <h1 class="text-3xl font-bold text-green-900 mb-3">Gradientes</h1>
+        <h1 class="text-3xl font-bold text-green-900 mb-3 bg-white">
+          @switch (seleccion) {
+            @case ('') {
+              Gradientes
+            }
+            @case ('geo') {
+              Gradiente Geometrico
+            }
+            @case ('arit') {
+              Gradiente Aritmetico
+            }
+          }
+        </h1>
         <!-- Imagen explicativa -->
-        <img src="assets/formulas/formula_interes.png" alt="" srcset="">
+        @switch (seleccion) {
+          @case ('') {
+            <img src="assets/formulas/gradiente.png" alt="" srcset="">
+          }
+          @case ('geo') {
+            <img src="assets/formulas/gradiente-geometrico.png" alt="" srcset="" width="480px">
+          }
+          @case ('arit') {
+            <img src="assets/formulas/gradiente-aritmetico.png" alt="" srcset="" width="480px">
+          }
+        }
+        
         <!-- Texto -->
-        <p class="text-lg text-black text-justify mx-12">El <span class="font-bold text-custom-green">interés simple</span> es la tasa aplicada sobre un capital origen que permanece constante en el tiempo y no se añade a periodos sucesivos, es decir, es el interés que se calcula solo sobre la cantidad original sin tener en cuenta los intereses previamente generados.</p>
+        <p class="text-lg text-black text-justify mx-12">
+          @if (creciente) {
+            <span class="tooltiptext">Aumenta la cuota.</span>
+          }@else if (decreciente) {
+            <span class="tooltiptext">Disminuye la cuota.</span>
+          }@else if (vencido) {
+            <span class="tooltiptext">Se paga cada cuota al finalizar el periodo.</span>
+          }@else if (anticipado) {
+            <span class="tooltiptext">Se da un inicial antes del pago de la primera cuota.</span>
+          }
+          
+          @switch (seleccion) {
+            @case ('') {
+              Los gradientes consisten en una serie de pagos periódicos que aumentan o disminuyen en cada
+              periodo, con relación al pago anterior, es decir, es una forma de pago en el que las
+              cuotas varían.
+              Donde se divide en <span class="font-bold text-green-800">2 tipos de gradiente</span> los cuales son <span class="font-bold text-green-800 italic">Aritmetico</span> y <span class="font-bold text-green-800 italic">Geometrico</span>.
+            }
+            @case ('geo') {
+              Es un tipo de gradiente el cual cada pago es igual al del período anterior pero <span class="font-semibold italic text-green-700">aumentando o disminuyendo en un mismo porcentaje constante.</span>
+              Este tipo se desglosa en varios subtipos: <span class="font-semibold text-green-700 tooltip" (mouseover)="creciente=true" (mouseout)="creciente=false">Creciente</span>, <span class="font-semibold text-green-700 tooltip" (mouseover)="decreciente=true" (mouseout)="decreciente=false">decreciente</span>, <span class="font-semibold text-green-700 tooltip" (mouseover)="anticipado=true" (mouseout)="anticipado=false">anticipado</span> y <span class="font-semibold text-green-700 tooltip" (mouseover)="vencido=true" (mouseout)="vencido=false">vencido</span>.
+            }
+            @case ('arit') {
+              Es un tipo de gradiente el cual cada pago es igual al del periodo anterior pero <span class="font-semibold italic text-green-700">aumentando o disminuyendo en una cantidad de dinero constante</span>.
+              Este tipo se divide en varios subtipos: <span class="font-semibold text-green-700 tooltip" (mouseover)="creciente=true" (mouseout)="creciente=false">Creciente</span>, <span class="font-semibold text-green-700 tooltip" (mouseover)="decreciente=true" (mouseout)="decreciente=false">decreciente</span>, <span class="font-semibold text-green-700 tooltip" (mouseover)="anticipado=true" (mouseout)="anticipado=false">anticipado</span> y <span class="font-semibold text-green-700 tooltip" (mouseover)="vencido=true" (mouseout)="vencido=false">vencido</span>.
+            }
+          }
+        </p>
+         
+        
       </div>
     </div>
   
-    <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100" id="CalculatorInteresRate">
-      <h2 class="text-xl text-black font-bold mb-3 ml-2">
-        Ingresa los datos de tu ejercicio
-      </h2>
+    <div class="w-1/2 rounded-xl m-5 p-5 bg-green-200" id="CalculatorInteresRate">
+      <h2 class="text-xl text-black font-bold mb-3 ml-2"> Ingresa los datos de tu ejercicio</h2>
       <hr class="linea" />
       <section class="mb-14">
         <form class="ml-5 mt-3 mr-10">
-          <div>
-            <input type="checkbox" name="" id="">
-          <label for="">G. Aritmetico</label>
-          <input type="checkbox" name="" id="">
-          <label for="">G. Geometrico</label>
+          <div class="flex justify-between">
+            <div>
+              <input type="radio" name="opciones" id="arit" (change)="changeGradient('arit')" class="mr-2">
+              <label for="arit" class="font-semibold">Gradiente Aritmetico</label>
+            </div>
+            <div>
+              <input type="radio" name="opciones" id="geo" (change)="changeGradient('geo')" class="mr-2">
+              <label for="geo" class="font-semibold">Gradiente Geometrico</label>
+            </div>
           </div>
-          <input type="number" name="" placeholder="Valor Presente" id="">
-          <input type="number" name="" placeholder="Valor Primera Cuota" id="">
-          <app-time-grad></app-time-grad>
-          <input type="text" name="" placeholder="Gradiente + ó -" id="">
-
+          <div>
+            <input type="number" name="" placeholder="Valor Presente" id="" (change)="changeInput($event,1)" class="mr-1 w-56 rounded-lg p-1 my-2">
+            <input type="number" name="" placeholder="Valor Primera Cuota" id="" (change)="changeInput($event,2)" class="w-56 rounded-lg p-1 my-2">
+          </div>
           
+          <app-time-grad (tasaInteres)="cambioTasaI($event)"></app-time-grad>
+          <input type="text" name="" placeholder="Gradiente + ó -" id="" (change)="changeInput($event,3)" class="rounded-lg p-1 mr-1 w-56">  
+          <input type="number" name="" id="" (change)="changeInput($event,5)" placeholder="Cuota Inicial" class="rounded-lg p-1 w-56">
+          <div class="flex justify-between my-1"> 
+            <div>
+              <input type="radio" name="masomenos" id="" value="crec" (change)="changeInput($event,4)" class="mr-2">
+              <label for="" class="font-semibold">Creciente</label>
+            </div>
+            <div>
+              <input type="radio" name="masomenos" id="" value="decr" (change)="changeInput($event,4)" class="mr-2">
+              <label for="" class="font-semibold">Decreciente</label>
+            </div>
+          </div>
+          
+          <div>
+            <p class="font-semibold">Resultado</p>
+            <input type="radio" name="resultado" value="VP" (change)="changeResult($event)" class="mr-1">
+            <label for="VP" class="mr-2">Valor Presente</label>
+            <input type="radio" name="resultado" value="VF" (change)="changeResult($event)" class="mr-1">
+            <label for="VF" class="mr-2">Valor Futuro</label>
+            <input type="radio" name="resultado" value="1P"  (change)="changeResult($event)" class="mr-1">
+            <label for="A" class="mr-1">Primera cuota</label>
+            <input type="radio" name="resultado" value="C" (change)="changeResult($event)" class="mr-1">
+            <label for="NC">Una n cuota</label>
+          </div>
         </form>
       </section>
       <section id="SectionResult">
-        <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-4 h-28">
+        <div class="bg-green-400 mr-6 ml-5 rounded-xl relative pb-4 h-28 bottom-4">
           <button
             class="absolute w-1/3 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-2"
-          >
+            (click)="onSubmit()"
+            >
             <p class="text-xl font-bold">Calcular</p>
           </button>
           <section class="flex items-center">
+            <div class="p-2">
+              <button (click)="clear()">🔃</button>
+            </div>
             <div class="justify-between w-3/4 mt-8 pl-6">
-             
+             <p>{{resultado != 0 ? resultado:""}}</p>
             </div>
           </section>
         </div>

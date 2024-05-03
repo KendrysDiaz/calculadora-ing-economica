@@ -1,0 +1,19 @@
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltiptext {
+  width: 150px;
+  font-weight: bold;
+  background-color: #edededde;
+  color: #000000be;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%; 
+  margin-left: -60px;
+  transition: opacity 0.3s;
+}

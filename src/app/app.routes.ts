@@ -36,6 +36,12 @@ export const routes: Routes = [
         title: "Gradientes",
         loadComponent: () =>
           import("../app/pages/gradient/gradient.component"),
+      },
+      {
+        path: "tir",
+        title: "Tasa Interna de Retorno",
+        loadComponent: () =>
+          import("../app/pages/tir/tir.component"),
       }
     ],
   },

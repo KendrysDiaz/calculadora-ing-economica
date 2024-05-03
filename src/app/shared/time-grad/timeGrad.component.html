@@ -1,34 +1,38 @@
 <div>
-  <div>
-    <label for="cuota">Cuota</label>
-    <input type="radio" name="option" id="cuota" (change)="seleccion='Cuota'">
-    <label for="tiempo">Tiempo</label>
-    <input type="radio" name="option" id="tiempo" (change)="seleccion='Tiempo'">
+  <div class="flex justify-between">
+    <div>
+      <input type="radio" name="option" id="cuota" (change)="seleccion='Cuota'" class="mr-2">
+      <label for="cuota" class="font-semibold">Cuota</label>
+    </div>
+    <div>
+      <input type="radio" name="option" id="tiempo" (change)="seleccion='Tiempo'" class="mr-2">
+      <label for="tiempo" class="font-semibold">Tiempo</label>
+    </div>
   </div>
   @if (seleccion == 'Cuota') {
-    <input type="number" name="" id="">
-    <select name="" id="">
+    <input type="number" name="" id="" (change)="changeUnidad($event,4)" placeholder="# cuotas" class="mr-2 rounded-lg p-1 my-1 w-4/6">
+    <select name="" id="" (change)="changeUnidad($event,1)" class="rounded-lg p-1 w-32">
       <option value=""></option>
-      <option value="">Anual</option>
-      <option value="">Mensual</option>
-      <option value="">Bimensual</option>
-      <option value="">Trimestral</option>
+      <option value="anual">Anual</option>
+      <option value="mensual">Mensual</option>
+      <option value="bimensual">Bimensual</option>
+      <option value="trimestral">Trimestral</option>
     </select>
   } @else if (seleccion === 'Tiempo'){
-    <input type="number" name="" id="">
-    <select name="" id="">
+    <input type="number" name="" id="" (change)="changeUnidad($event,4)" placeholder="Tiempo" class="mr-2 rounded-lg p-1 my-1 w-4/6">
+    <select name="" id="" (change)="changeUnidad($event,1)" class="rounded-lg p-1 w-32">
       <option value=""></option>
-      <option value="">Años</option>
-      <option value="">Meses</option>
-      <option value="">Trimestres</option>
+      <option value="anual">Años</option>
+      <option value="mensual">Meses</option>
+      <option value="trimestral">Trimestres</option>
     </select>
   }
-  <input placeholder="Tasa de interes" type="number" name="" id="">
-  <select name="" id="">
+  <input placeholder="Tasa de interes" type="number" name="" id="" (change)="changeUnidad($event,3)" class="mr-2 rounded-lg p-1 my-2 w-4/6">
+  <select name="" id="" (change)="changeUnidad($event,2)" class="rounded-lg p-1 my-2 w-32">
     <option value=""></option>
-    <option value="">Anual</option>
-    <option value="">Mensual</option>
-    <option value="">Bimensual</option>
-    <option value="">Trimestral</option>
+    <option value="anual">Anual</option>
+    <option value="mensual">Mensual</option>
+    <option value="bimensual">Bimensual</option>
+    <option value="trimestral">Trimestral</option>
   </select>
 </div>
