@@ -1,5 +1,11 @@
 import { AnnuitiesService } from "./../../service/annuities.service";
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import { InputComponent } from "../../shared/input/input.component";
 import { InterestRateConverterComponent } from "../../shared/interest-rate-converter/interest-rate-converter.component";
 import { annuitiesInterface } from "../../interface/annuities.interface";
@@ -35,7 +41,7 @@ export default class AnnuitiesComponent {
   tipo_diferidad: any = true;
   constructor(
     private annuitiesService: AnnuitiesService,
-    private lista_periodos: AnnutiesConvertionTimeFunctionsService
+    lista_periodos: AnnutiesConvertionTimeFunctionsService
   ) {
     this.periodos = lista_periodos.periodos_normal;
     this.annuities_Form = new FormGroup({
@@ -111,6 +117,7 @@ export default class AnnuitiesComponent {
     selects.forEach(function (select) {
       select.selectedIndex = 0;
     });
+    this.valorSeleccionado_2 = "Vencida";
   }
 
   onRadioChange(valor: string) {
@@ -121,16 +128,28 @@ export default class AnnuitiesComponent {
 
   onRadioChange_2(valor: string) {
     this.valorSeleccionado_2 = valor;
+    this.limpiarCampos();
+  }
+
+  @Output() tipoDiferidaChange = new EventEmitter<string>();
+
+  onTipoDiferidaChange(nuevoValor: string) {
+    this.valorSeleccionado_2 = nuevoValor;
+    this.tipoDiferidaChange.emit(nuevoValor);
   }
 
   enviar(event: Event) {
     this.diferida = false;
     event.preventDefault();
     this.annuities_Form.get("tipo_anualidad")?.setValue(this.valorSeleccionado);
-    this.resultado = this.annuitiesService.solution_anualidad(
-      this.annuities_Form.value,
-      this.diferida,
-      this.tipo_diferidad
-    );
+    if (this.annuities_Form.get("tasa_interes_efectiva")?.value == 0) {
+      alert("Falta informacion respecto a la tasa interes efectiva");
+    } else {
+      this.resultado = this.annuitiesService.solution_anualidad(
+        this.annuities_Form.value,
+        this.diferida,
+        this.valorSeleccionado_2
+      );
+    }
   }
 }

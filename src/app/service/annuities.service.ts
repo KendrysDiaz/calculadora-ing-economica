@@ -28,27 +28,17 @@ export class AnnuitiesService {
     diferida: boolean,
     tipo_diferida: string
   ): any {
-    console.log("Entro a solution anulidad");
     let tipo = info.tipo_anualidad;
-    console.log("tipo anualidad", tipo);
-    //  true para diferida
-    console.log("Es diferida: ", diferida);
-    if (diferida) {
-      switch (tipo) {
-        case "Anticipada":
-          return this.anticipada(info);
-        case "Vencida":
-          return this.vencida(info);
-        default:
-          break;
-      }
-    } else {
-      if (tipo == "Diferida") {
-        console.log("Entro al if del diferida");
+    switch (tipo) {
+      case "Anticipada":
+        return this.anticipada(info);
+      case "Vencida":
+        return this.vencida(info);
+      case "Diferida":
         return this.diferida(info, tipo_diferida);
-      }
+      default:
+        break;
     }
-    return "";
   }
 
   vencida(info: annuitiesInterface): any {
@@ -67,7 +57,19 @@ export class AnnuitiesService {
       info.valor_presente == 0
     ) {
       //listo
-      return this.vencidas_services.buscar_valor_numero_periodos(info);
+      return this.vencidas_services.buscar_valor_numero_periodos_con_valor_final(
+        info
+      );
+    } else if (
+      info.valor_final == 0 &&
+      info.num_periodos == 0 &&
+      info.renta != 0 &&
+      info.valor_presente != 0
+    ) {
+      //listo
+      return this.vencidas_services.buscar_valor_numero_periodos_con_valor_presente(
+        info
+      );
     } else if (
       info.valor_final == 0 &&
       info.num_periodos != 0 &&
@@ -75,13 +77,20 @@ export class AnnuitiesService {
       info.valor_presente != 0
     ) {
       //listo
-      return this.vencidas_services.buscar_valor_renta(info);
+      return this.vencidas_services.buscar_valor_renta_con_valor_presente(info);
+    } else if (
+      info.valor_final != 0 &&
+      info.num_periodos != 0 &&
+      info.renta == 0 &&
+      info.valor_presente == 0
+    ) {
+      //listo
+      return this.vencidas_services.buscar_valor_renta_con_valor_final(info);
     }
     return 0;
   }
 
   anticipada(info: annuitiesInterface): any {
-    console.log("Entro", info);
     if (
       info.valor_final == 0 &&
       info.num_periodos != 0 &&
@@ -94,9 +103,20 @@ export class AnnuitiesService {
       info.valor_final != 0 &&
       info.num_periodos == 0 &&
       info.renta != 0 &&
+      info.valor_presente == 0
+    ) {
+      return this.anticipadas_services.buscar_valor_numero_periodos_con_valor_final(
+        info
+      );
+    } else if (
+      info.valor_final == 0 &&
+      info.num_periodos == 0 &&
+      info.renta != 0 &&
       info.valor_presente != 0
     ) {
-      return this.anticipadas_services.buscar_valor_numero_periodos(info);
+      return this.anticipadas_services.buscar_valor_numero_periodos_con_valor_presente(
+        info
+      );
     } else if (
       info.valor_final == 0 &&
       info.num_periodos != 0 &&
@@ -104,12 +124,23 @@ export class AnnuitiesService {
       info.valor_presente != 0
     ) {
       //listo
-      return this.anticipadas_services.buscar_valor_renta(info);
+      return this.anticipadas_services.buscar_valor_renta_con_valor_presente(
+        info
+      );
+    } else if (
+      info.valor_final != 0 &&
+      info.num_periodos != 0 &&
+      info.renta == 0 &&
+      info.valor_presente == 0
+    ) {
+      //listo
+      return this.anticipadas_services.buscar_valor_renta_con_valor_final(info);
     }
     return 0;
   }
 
   diferida(info: annuitiesInterface, tipo_diferida: string) {
+    console.log("Tipo de diferida:", tipo_diferida);
     //false para vencida
     if (
       info.valor_presente == 0 &&

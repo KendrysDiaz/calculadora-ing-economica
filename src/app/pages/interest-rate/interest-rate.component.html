@@ -87,7 +87,6 @@
 
         }
 
-        
         <div class="flex gap-4 justify-between mb-3">
           <h3 class="text-base text-black font-semibold">Valor Final</h3>
           <input
@@ -134,6 +133,8 @@
       <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-2">
         <button
           (click)="ejecutarFuncionHijo(); calcular()"
+          type="submit"
+          [disabled]="registrationForm.invalid"
           class="absolute w-1/2 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-4"
         >
           <p class="text-2xl font-bold">Calcular</p>
@@ -172,8 +173,8 @@
           >
             <h3 class="text-sm">Tiempo</h3>
             <h3 class="font-sm ml-4">
-              {{ tiempo.numero }} {{ obtenerNombrePeriodo(tiempo.unidadDeTiempo)
-              }}
+              {{ tiempo.numero.toFixed(2) }} {{
+              obtenerNombrePeriodo(tiempo.unidadDeTiempo) }}
             </h3>
           </div>
         </section>

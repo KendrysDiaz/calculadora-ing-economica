@@ -7,7 +7,11 @@
   }
   <div class="w-1/2 h-screen relative">
     <div class="ml-20 pl-12 mt-5">
-      <app-carrousel [tipo]="valorSeleccionado"></app-carrousel>
+      <app-carrousel
+        [tipo]="valorSeleccionado"
+        [tipo_diferida]="valorSeleccionado_2"
+        (tipoDiferidaChange)="onTipoDiferidaChange($event)"
+      ></app-carrousel>
     </div>
   </div>
   <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100">
@@ -45,7 +49,6 @@
     </div>
 
     @if (valorSeleccionado=="Diferida") {
-
 
     <div class="flex justify-between mb-5 ml-20 mr-20">
       <label class="segundo-radio">

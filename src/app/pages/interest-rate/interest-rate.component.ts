@@ -127,8 +127,15 @@ export default class InterestRateComponent {
   }
 
   calcular() {
-    if (this.hijo.page == 0) {
-      alert("Por favor, revise la informaciòn");
+    if (
+      this.hijo.page == 0
+      /*||
+      this.namePeriodoDeCapitalizacion == "" ||
+      this.namePeriodoFinalParaTasaCompuesta == "" ||
+      parseFloat(this.registrationForm.get("finalValue")!.value) < 0 ||
+      parseFloat(this.registrationForm.get("presentValue")!.value) < 0 */
+    ) {
+      alert("Por favor, revise la informaciòn que ha ingresado");
     } else {
       if (this.showContent() == true) {
         this.result = this.servicioSimple.calculatorInteresRateSimple(
@@ -144,6 +151,22 @@ export default class InterestRateComponent {
         if (this.namePeriodo != "Periodo" && this.namePeriodo != undefined) {
           this.infoTasaAnualCuandoEsPeriodo = this.result.interesRateAnual;
         }
+
+        /*              rateMessage="{{ infoTasaFinal.numero }}"
+              title="{{ infoTasaFinal.unidadDeTiempo }}"
+              informacioExtra=" {{ infoTasaAnualCuandoEsPeriodo }}"
+              informacioExtra2=" {{tipoTiempoProvisional}}"
+              unidadDeTiempo="{{ tiempo.unidadDeTiempo }}" */
+
+        //informacioExtra
+        //rateMessage
+        //tittle
+        
+        console.log("_____________________________________________________");
+        console.log("informacioExtra", this.infoTasaAnualCuandoEsPeriodo);
+        console.log("title", this.infoTasaFinal.unidadDeTiempo);
+        console.log("rateMessage", this.infoTasaFinal);
+
         this.vaciarCampos();
       }
 

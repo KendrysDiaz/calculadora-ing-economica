@@ -54,7 +54,7 @@ export class AnnutiesVencidasFunctionsService {
     );
   }
 
-  buscar_valor_renta(info: annuitiesInterface) {
+  buscar_valor_renta_con_valor_presente(info: annuitiesInterface) {
     let n = this.convertion_time.conversion(
       info.num_periodos,
       info.val_frecuencia_tiempo,
@@ -66,12 +66,29 @@ export class AnnutiesVencidasFunctionsService {
       (1 - (1 + info.tasa_interes_efectiva) ** -n);
 
     return (
-      "Segun la informacion proporcionada el valor de renta o cuota es de: " +
+      "Segun la informacion proporcionada el valor de renta (teniendo en cuenta el capital): " +
       renta.toFixed(2)
     );
   }
 
-  buscar_valor_numero_periodos(info: annuitiesInterface): any {
+  buscar_valor_renta_con_valor_final(info: annuitiesInterface) {
+    let n = this.convertion_time.conversion(
+      info.num_periodos,
+      info.val_frecuencia_tiempo,
+      info.val_frecuencia_tasa
+    );
+
+    let renta =
+      info.valor_final /
+      (((1 + info.tasa_interes_efectiva) ** n - 1) /
+        info.tasa_interes_efectiva);
+    return (
+      "Segun la informacion proporcionada el valor de renta (teniendo en cuenta el monto) " +
+      renta.toFixed(2)
+    );
+  }
+
+  buscar_valor_numero_periodos_con_valor_final(info: annuitiesInterface): any {
     let val_1 =
       Math.log(
         (info.valor_final * info.tasa_interes_efectiva) / info.renta + 1
@@ -79,7 +96,23 @@ export class AnnutiesVencidasFunctionsService {
 
     let val_2 = this.convertion_time.obtener_nombre(info.val_frecuencia_tasa);
     return (
-      "Segun los datos suministrados el numero de periodos es de: " +
+      "Segun los datos suministrados el numero de periodos (teniendo en cuenta el monto) es de: " +
+      val_1.toFixed(2) +
+      " " +
+      val_2
+    );
+  }
+
+  buscar_valor_numero_periodos_con_valor_presente(
+    info: annuitiesInterface
+  ): any {
+    let val =
+      1 - (info.valor_presente * info.tasa_interes_efectiva) / info.renta;
+    let val_1 = Math.log(val) / Math.log(1 + info.tasa_interes_efectiva);
+
+    let val_2 = this.convertion_time.obtener_nombre(info.val_frecuencia_tasa);
+    return (
+      "Segun los datos suministrados el numero de periodos (teniendo en cuenta el capital) es de: " +
       val_1.toFixed(2) +
       " " +
       val_2

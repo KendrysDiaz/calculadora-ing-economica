@@ -48,8 +48,8 @@ export class AnnutiesFunctionsDiferidasAnticipadaService {
 
     let val_1 = info.valor_presente * info.tasa_interes_efectiva;
     let val_2 = 1 - (1 + info.tasa_interes_efectiva) ** -n;
-    let val_3 = (1 + info.tasa_interes_efectiva) ** (y - 1);
-
+    let val_3 = (1 + info.tasa_interes_efectiva) ** (y - 1) / 1;
+  
     return (
       "Segun la informacion proporcionada la renta o cuota de anualidad es de: " +
       ((val_1 / val_2) * val_3).toFixed(2)

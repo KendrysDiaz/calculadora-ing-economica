@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { interestRateInterface } from '../interface/interestRate.interface';
+import { Injectable } from "@angular/core";
+import { interestRateInterface } from "../interface/interestRate.interface";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class InterestRateSimpleService {
   constructor() {}
@@ -18,6 +18,12 @@ export class InterestRateSimpleService {
     const timeAnual = interestRate.timeAnual;
     const timePeriodo = interestRate.timePeriodo;
 
+    console.log("presentValue: ", presentValue);
+    console.log("finalValue: ", finalValue);
+    console.log("interes: ", interes);
+    console.log("timeAnual: ", timeAnual);
+    console.log("timePeriodo: ", timePeriodo);
+
     //Valores de salida
     let resultPresentValue: number = 0;
     let resultFinalValue: number = 0;
@@ -31,7 +37,8 @@ export class InterestRateSimpleService {
       resultFinalValue = finalValue;
       resultPresentValue = presentValue;
       resultInterest = finalValue - presentValue;
-      resultInterestRateAnual = ((finalValue / presentValue - 1) / timeAnual) * 100;
+      resultInterestRateAnual =
+        ((finalValue / presentValue - 1) / timeAnual) * 100;
       if (timePeriodo > 0) {
         resultInterestRatePeriodo =
           ((finalValue / presentValue - 1) / timePeriodo) * 100;
@@ -82,6 +89,7 @@ export class InterestRateSimpleService {
       },
     };
 
+    console.log("Datos: ", Datos);
     return Datos;
   }
 }
