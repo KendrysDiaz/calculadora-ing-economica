@@ -133,49 +133,18 @@
       <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-2">
         <button
           (click)="ejecutarFuncionHijo(); calcular()"
-          type="submit"
-          [disabled]="registrationForm.invalid"
+          type="sum"
           class="absolute w-1/2 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-4"
         >
           <p class="text-2xl font-bold">Calcular</p>
         </button>
         <section class="flex items-center justify-center">
           <div class="gap-3 w-3/4 mt-10 justify-between">
-            <app-interest-ratemessage
-              rateMessage="{{ infoTasaFinal.numero }}"
-              title="{{ infoTasaFinal.unidadDeTiempo }}"
-              informacioExtra=" {{ infoTasaAnualCuandoEsPeriodo }}"
-              informacioExtra2=" {{tipoTiempoProvisional}}"
-              unidadDeTiempo="{{ tiempo.unidadDeTiempo }}"
-              [tipoTasa]="showContent()"
-            ></app-interest-ratemessage>
-          </div>
-        </section>
-        <section class="flex m-5 justify-between">
-          <div
-            class="flex-1 rounded-l-3xl border-green-800 border-4 bg-white p-2"
-          >
-            <h3 class="text-sm">Valor Final</h3>
-            <h3 class="font-sm ml-4">${{ infofinalValue }}</h3>
-          </div>
-          <div class="flex-1 bg-white p-2 border-green-800 border-4">
-            <h3 class="text-sm">Valor Presente</h3>
-            <h3 class="font-sm ml-4">${{ infopresentValue }}</h3>
-          </div>
-          @if (showContent()) {
-          <div class="flex-1 bg-white p-2 border-green-800 border-4">
-            <h3 class="text-sm">Interes</h3>
-            <h3 class="font-sm ml-4">${{ infoInteres }}</h3>
-          </div>
-          }
-          <div
-            class="flex-1 rounded-r-3xl bg-white p-2 border-green-800 border-4"
-          >
-            <h3 class="text-sm">Tiempo</h3>
-            <h3 class="font-sm ml-4">
-              {{ tiempo.numero.toFixed(2) }} {{
-              obtenerNombrePeriodo(tiempo.unidadDeTiempo) }}
-            </h3>
+            <div class="flex justify-between">
+              <h4 class="text-sl mt-2 text-black flex font-semibold mb-3">
+                {{ mensaje}}
+              </h4>
+            </div>
           </div>
         </section>
       </div>
