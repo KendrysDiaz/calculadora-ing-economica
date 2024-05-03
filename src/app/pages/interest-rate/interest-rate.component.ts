@@ -8,7 +8,6 @@ import {
 import { RadioButtonComponent } from "../../shared/radio-button/radio-button.component";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { InputComponent } from "../../shared/input/input.component";
-import { InterestRatemessageComponent } from "../../shared/interest-ratemessage/interest-ratemessage.component";
 import { TimeCheckComponent } from "../../shared/time-check/time-check.component";
 import { ButtonTrashComponent } from "../../shared/button-trash/button-trash.component";
 import { InterestRateCompuestoService } from "../../service/interest-rate-compuesto.service";
@@ -20,6 +19,7 @@ export interface infoInicial {
   url: string;
   informacion: string;
 }
+
 @Component({
   selector: "app-interest-rate",
   standalone: true,
@@ -29,7 +29,6 @@ export interface infoInicial {
     RadioButtonComponent,
     ReactiveFormsModule,
     InputComponent,
-    InterestRatemessageComponent,
     TimeCheckComponent,
     ButtonTrashComponent,
   ],
@@ -39,41 +38,17 @@ export default class InterestRateComponent {
   @ViewChildren("selectElement")
   elementosSelect!: ElementRef<HTMLSelectElement>[];
 
-  time: any;
-
+  public showContent = signal(false);
   registrationForm: FormGroup;
-  infofinalValue: number = 0;
-  infopresentValue: number = 0;
-  infoInteres: number = 0;
-  infoTiempo: any;
-  tipoTiempoProvisional: any;
-  infoTasaFinal: {
-    numero: number;
-    unidadDeTiempo: string;
-  } = {
-    numero: 0,
-    unidadDeTiempo: "",
-  };
-
-  tiempo: {
-    numero: number;
-    unidadDeTiempo: string;
-  } = {
-    numero: 0,
-    unidadDeTiempo: "",
-  };
-
-  namePeriodoFinalParaTasaCompuesta: string = "";
-  infoTasaPeriodo: string = "";
-  infoTasaAnualCuandoEsPeriodo: number = 0;
-  namePeriodo: string = "";
-  namePeriodoDeCapitalizacion: string = "";
   result: any;
-  isSelectedPeriodo: boolean = false;
-  infoInicial: infoInicial[];
-  infoSeleccionada: any = "";
+  mensaje: any;
   selectPeriodo: boolean = false;
-
+  infoSeleccionada: any = "";
+  infoInicial: infoInicial[];
+  isSelectedPeriodo: boolean = false;
+  namePeriodoDeCapitalizacion: string = "";
+  namePeriodo: string = "";
+  namePeriodoFinalParaTasaCompuesta: string = "";
   periodos: Periodos[] = [
     { nombre: "Anual", equivalencia: "1 año" },
     { nombre: "Semestre", equivalencia: "6 meses" },
@@ -83,8 +58,6 @@ export default class InterestRateComponent {
     { nombre: "Mensual", equivalencia: "1 mes" },
     { nombre: "Quincenal", equivalencia: "15 días" },
   ];
-
-  public showContent = signal(false);
 
   constructor(
     private servicioSimple: InterestRateSimpleService,
@@ -117,7 +90,6 @@ export default class InterestRateComponent {
 
   ejecutarFuncionHijo() {
     this.hijo.timeCalculator();
-    this.time = this.hijo.time;
     this.registrationForm.get("timePeriodo")?.setValue(this.hijo.nPeriodos);
     this.registrationForm.get("timeAnual")?.setValue(this.hijo.time);
     this.namePeriodo = this.hijo.namePeriodo;
@@ -127,14 +99,7 @@ export default class InterestRateComponent {
   }
 
   calcular() {
-    if (
-      this.hijo.page == 0
-      /*||
-      this.namePeriodoDeCapitalizacion == "" ||
-      this.namePeriodoFinalParaTasaCompuesta == "" ||
-      parseFloat(this.registrationForm.get("finalValue")!.value) < 0 ||
-      parseFloat(this.registrationForm.get("presentValue")!.value) < 0 */
-    ) {
+    if (this.hijo.page == 0) {
       alert("Por favor, revise la informaciòn que ha ingresado");
     } else {
       if (this.showContent() == true) {
@@ -142,31 +107,7 @@ export default class InterestRateComponent {
           this.registrationForm.value,
           this.hijo.tipoDeTiempo
         );
-        this.tipoTiempoProvisional = this.hijo.tipoDeTiempo;
-        this.infoInteres = parseFloat(this.result.interest.toFixed(2));
-        this.infofinalValue = this.result.finalValue;
-        this.infopresentValue = this.result.presentValue;
-        this.tiempo = this.result.tiempo;
-        this.infoTasaFinal = this.result.resultInteres;
-        if (this.namePeriodo != "Periodo" && this.namePeriodo != undefined) {
-          this.infoTasaAnualCuandoEsPeriodo = this.result.interesRateAnual;
-        }
-
-        /*              rateMessage="{{ infoTasaFinal.numero }}"
-              title="{{ infoTasaFinal.unidadDeTiempo }}"
-              informacioExtra=" {{ infoTasaAnualCuandoEsPeriodo }}"
-              informacioExtra2=" {{tipoTiempoProvisional}}"
-              unidadDeTiempo="{{ tiempo.unidadDeTiempo }}" */
-
-        //informacioExtra
-        //rateMessage
-        //tittle
-        
-        console.log("_____________________________________________________");
-        console.log("informacioExtra", this.infoTasaAnualCuandoEsPeriodo);
-        console.log("title", this.infoTasaFinal.unidadDeTiempo);
-        console.log("rateMessage", this.infoTasaFinal);
-
+        this.mensaje = this.result;
         this.vaciarCampos();
       }
 
@@ -185,10 +126,7 @@ export default class InterestRateComponent {
               (e) => e.nombre == this.namePeriodoFinalParaTasaCompuesta
             ) as Periodos
           );
-          this.infoTasaFinal = this.result.resultInteres;
-          this.infofinalValue = this.result.finalValue;
-          this.infopresentValue = this.result.presentValue;
-          this.tiempo = this.result.tiempo;
+          this.mensaje = this.result;
           this.vaciarCampos();
         } else {
           alert(
@@ -225,30 +163,15 @@ export default class InterestRateComponent {
     this.hijo.week = 0;
     this.hijo.day = 0;
     this.hijo.periodo = "";
-
     this.camposRepetidosReBo();
   }
 
   camposRepetidosReBo() {
-    this.tipoTiempoProvisional = "";
     this.hijo.page = 0;
     this.hijo.nPeriodos = 0;
     this.hijo.time = 0;
     this.selectPeriodo = false;
     this.reiniciarLosSelect();
-  }
-
-  reiniciarTitulos() {
-    this.tiempo = { numero: 0, unidadDeTiempo: "" };
-    this.infoTasaFinal = { numero: 0, unidadDeTiempo: "" };
-    this.infofinalValue = 0;
-    this.infopresentValue = 0;
-    this.infoInteres = 0;
-    this.infoTiempo = 0;
-    this.infoTasaPeriodo = "";
-    this.namePeriodo = "";
-    this.infoTasaAnualCuandoEsPeriodo = 0;
-    this.camposRepetidosReBo();
   }
 
   reiniciarLosSelect() {
@@ -282,10 +205,11 @@ export default class InterestRateComponent {
 
   showContentRate() {
     this.showContent.update((value) => !value);
-    this.reiniciarTitulos();
+    this.camposRepetidosReBo();
     this.reiniciarLosSelect();
     let index: number = this.showContent() ? 0 : 1;
     this.namePeriodoDeCapitalizacion = "";
+    this.mensaje = "";
     this.infoSeleccionada = this.infoInicial[index];
   }
 }
