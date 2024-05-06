@@ -140,7 +140,6 @@ export class AnnuitiesService {
   }
 
   diferida(info: annuitiesInterface, tipo_diferida: string) {
-    console.log("Tipo de diferida:", tipo_diferida);
     //false para vencida
     if (
       info.valor_presente == 0 &&

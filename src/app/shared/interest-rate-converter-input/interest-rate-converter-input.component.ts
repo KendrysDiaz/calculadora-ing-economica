@@ -33,7 +33,6 @@ export class InterestRateConverterInputComponent {
   ];
 
   on_Change_input(event: Event) {
-    console.log(this.titulo);
     const target = event.target as HTMLSelectElement;
     this.input_val = parseFloat(target.value);
   }

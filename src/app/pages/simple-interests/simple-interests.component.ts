@@ -80,7 +80,6 @@ export default class SimpleInterestsComponent {
         this.calculateTimeFromInterest();
       }
     }
-    console.log(this.capital, this.tasainteres, this.time)
     this.vaciarCampos();
   }
   setCalculadoValues(result1: any, result2: any, value1: any, value2: any) {
@@ -91,7 +90,6 @@ export default class SimpleInterestsComponent {
   }
 
   calculateInterestAndAmount() {
-    console.log(this.capital * this.tasainteres * this.time)
     this.interes = this.capital * this.tasainteres * this.time;
     this.monto = this.capital * (1 + (this.tasainteres * this.time));
     this.setCalculadoValues('Interes simple','Monto/VF', this.interes + '$',this.monto + '$');
@@ -130,7 +128,6 @@ export default class SimpleInterestsComponent {
         months = Math.floor((tiempo - years) * 12);
       }
       let days = Math.round((tiempo - years - months/12) * 365);
-      console.log(tiempo)
       result = `${years} años, ${months} meses y ${days} días`;
       this.time = 1
     } else {

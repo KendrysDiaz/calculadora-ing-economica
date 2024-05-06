@@ -19,13 +19,6 @@ export class InterestRateConverterComponent {
   }>();
 
   recibirTasaEfectiva(tasaEfectiva: any) {
-    console.log(
-      tasaEfectiva.tasa,
-      "frecuencia: ",
-      tasaEfectiva.val_frecuencia,
-      ": ",
-      tasaEfectiva.frecuencia
-    );
     this.tasa_interes_efectiva_periodica = tasaEfectiva.tasa;
     this.val_frecuencia = tasaEfectiva.val_frecuencia;
     this.frecuencia_interes_efectiva_periodica = tasaEfectiva.frecuencia;

@@ -93,7 +93,6 @@ export class InteresCompuestoServiceService {
           break;
       // Agrega otros casos según sea necesario
   }
-  console.log(capitalizacion);
     let base = (1 + (tasaInteres/ 100)/capitalizacion);
     let reult = Math.pow(base, periodos);
     const mc = (capital * reult);
@@ -200,7 +199,6 @@ export class InteresCompuestoServiceService {
           break;
       // Agrega otros casos según sea necesario
   }
-  console.log(capitalizacion);
 
     let base_ = (1 + (interes.tasaInteres / 100/capitalizacion));
     let result = Math.pow(base_, periodo);

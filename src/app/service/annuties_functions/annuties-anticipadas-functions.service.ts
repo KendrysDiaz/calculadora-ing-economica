@@ -58,7 +58,6 @@ export class AnnutiesAnticipadasFunctionsService {
       info.val_frecuencia_tiempo,
       info.val_frecuencia_tasa
     );
-    console.log("N= ", n);
     let renta =
       (info.valor_presente * info.tasa_interes_efectiva) /
       ((1 + info.tasa_interes_efectiva) *

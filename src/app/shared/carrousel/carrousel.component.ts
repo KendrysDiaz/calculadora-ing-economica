@@ -26,7 +26,6 @@ export class CarrouselComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     let val;
-    console.log("tipo: ", this.tipo_diferida);
     if (
       changes["tipo_diferida"] &&
       changes["tipo_diferida"].currentValue !==
