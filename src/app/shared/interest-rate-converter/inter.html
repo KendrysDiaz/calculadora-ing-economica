@@ -1,0 +1,158 @@
+<!-- POT -->
+<div class="min-h-screen bg-gray-100 flex justify-center items-center">
+  <div
+    class="w- p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500"
+  >
+    <div class="">
+      <h1 class="text-2xl font-bold text-gray-700 text-center">Tasa Interes</h1>
+      <div>
+        <label
+          for="inputname"
+          class="block text-gray-800 mt-3 font-semibold text-sm"
+          >Tasa interes efectiva periodica</label
+        >
+        <div class="mt-2 flex gap-5">
+          <input
+            type="text"
+            name="inputname"
+            class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+            (change)="on_Periodo_Change($event)"
+          />
+
+          <select
+            #selectElement
+            id=""
+            class="flex-grow input"
+            (change)=" on_Periodo_Change($event)"
+          >
+            <option value="">Periodo</option>
+            @for (periodo of periodos; track $index) {
+            <option [value]="periodo.nombre">
+              {{ periodo.nombre }}
+            </option>
+            }
+          </select>
+        </div>
+        <label class="pt-1 block text-gray-500 text-sm"
+          >Seleccione el periodo</label
+        >
+      </div>
+      <label class="pt-1 block text-gray-500 text-sm mt-2 text-center"
+        >¿Necesita Conversion?</label
+      >
+      <hr class="mt-3" />
+      <div class="space-x-4 flex p-1">
+        <div>
+          <label
+            for="inputname"
+            class="block text-gray-800 mt-3 font-semibold text-sm"
+            >Tasa interes nominal</label
+          >
+          <div class="mt-2 flex gap-5">
+            <input
+              type="text"
+              name="inputname"
+              class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+              (change)="on_Change_input_Tasa_Nominal($event)"
+            />
+
+            <select
+              #selectElement
+              id=""
+              class="flex-grow input"
+              (change)=" on_Periodo_Change($event)"
+            >
+              <option value="">Periodo</option>
+              @for (periodo of periodos; track $index) {
+              <option [value]="periodo.nombre">
+                {{ periodo.nombre }}
+              </option>
+              }
+            </select>
+
+            <select
+              id=""
+              class="flex-grow input"
+              (change)="on_FrecuenciaCapitalizacion_Change($event)"
+            >
+              <option value="">Frecuencia de capitalizacion</option>
+              @for (periodo of periodos; track $index) {
+              <option [value]="periodo.nombre">
+                {{ periodo.nombre }}
+              </option>
+              }
+            </select>
+          </div>
+        </div>
+        <div></div>
+      </div>
+      <div class="mt-4 mb-2 flex justify-between pl-4 pr-2 gap-3">
+        <h2 class="block text-xl font-semibold text-gray-700 cursor-auto">
+          {{(tasa_interes_efectiva_periodica*100).toFixed(2)}} %
+        </h2>
+        <button
+          class="text-lg block font-semibold py-2 px-6 text-green-100 hover:text-white bg-green-400 rounded-lg shadow hover:shadow-md transition duration-300"
+        >
+          Listo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ç
+<div id="campo_tasa">
+  <label class="block text-gray-800 mt-3 font-semibold text-sm"
+    >Tasa interes efectiva periodica</label
+  >
+  <div class="mt-2 flex gap-5">
+    <input
+      type="text"
+      name="inputname"
+      class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+      (change)="on_Periodo_Change($event)"
+    />
+
+    <select
+      #selectElement
+      id=""
+      class="flex-grow input"
+      (change)="on_Periodo_Change($event)"
+    >
+      <option value="">Periodo</option>
+      @for (periodo of periodos; track $index) {
+      <option [value]="periodo.nombre">
+        {{ periodo.nombre }}
+      </option>
+      }
+    </select>
+  </div>
+</div>
+
+<div id="campo_tasa">
+  <label class="block text-gray-800 mt-3 font-semibold text-sm"
+    >Tasa interes efectiva periodica</label
+  >
+  <div class="mt-2 flex gap-5">
+    <input
+      type="text"
+      name="inputname"
+      class="block w-56 rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
+      (change)="on_Periodo_Change($event)"
+    />
+
+    <select
+      #selectElement
+      id=""
+      class="flex-grow input"
+      (change)="on_Periodo_Change($event)"
+    >
+      <option value="">Periodo</option>
+      @for (periodo of periodos; track $index) {
+      <option [value]="periodo.nombre">
+        {{ periodo.nombre }}
+      </option>
+      }
+    </select>
+  </div>
+</div>

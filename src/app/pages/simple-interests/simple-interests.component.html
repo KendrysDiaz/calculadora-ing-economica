@@ -1,0 +1,74 @@
+<div class="flex max-h-full pt-5 pl-24 pr-6 justify-center items-center h-screen bg-[url('/assets/fondoInteres.svg')] bg-cover bg-bottom ">
+  <div class="w-1/2 relative">
+    <!-- Contenedor de información -->
+    <div class="w-full flex flex-col justify-center items-center text-white">
+      <!-- Título -->
+      <h1 class="text-3xl font-bold text-green-900 mb-3">Interés Simple</h1>
+      <!-- Imagen explicativa -->
+      <img src="assets/formulas/formula_interes.png" alt="" srcset="">
+      <!-- Texto -->
+      <p class="text-lg text-black text-justify mx-12">El <span class="font-bold text-custom-green">interés simple</span> es la tasa aplicada sobre un capital origen que permanece constante en el tiempo y no se añade a periodos sucesivos, es decir, es el interés que se calcula solo sobre la cantidad original sin tener en cuenta los intereses previamente generados.</p>
+    </div>
+  </div>
+
+  <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100" id="CalculatorInteresRate">
+    <h2 class="text-xl text-black font-bold mb-3 ml-2">
+      Ingresa los datos de tu ejercicio
+    </h2>
+    <hr class="linea" />
+    <section class="mb-14">
+      <form class="ml-5 mt-3 mr-10">
+        <app-input
+          (valorChange)="onCapitalChange($event)"
+          title="Capital/VP"
+          type="number"
+          info="capital"
+          init={{capital}}
+        ></app-input>
+        <app-input
+          (valorChange)="onInterestRateChange($event)"
+          title="Tasa interes"
+          type="input"
+          info="interest"
+          init={{tasainteres}}
+        ></app-input>
+        <app-input
+          (valorChange)="onInterestChange($event)"
+          title="Interes"
+          type="number"
+          info="interest"
+          init={{interes}}
+        ></app-input>
+        <app-time-check></app-time-check>
+        <app-input
+          (valorChange)="onAmountChange($event)"
+          title="Monto/VF"
+          type="number"
+          info="interest"
+          init={{monto}}
+        ></app-input>
+      </form>
+    </section>
+    <section id="SectionResult">
+      <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-4 h-28">
+        <button
+          (click)="ejecutarFuncionHijo(); interesSimpleCalculator()"
+          class="absolute w-1/3 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-2"
+        >
+          <p class="text-xl font-bold">Calcular</p>
+        </button>
+        <section class="flex items-center">
+          <div class="justify-between w-3/4 mt-8 pl-6">
+            @if (r1 && r2) {
+            <h2 class="font-semibold">{{ r1}}: <span class="font-normal">{{ calculado1 }}</span></h2>
+            <h2 class="font-semibold">{{r2 }}: <span class="font-normal">{{ calculado2 }}</span></h2>
+            } @else if (r1 && r2 === 0) {
+            <h2 class="font-semibold">{{ r1 }}: <span class="font-normal">{{ calculado1 }}</span></h2>
+            
+            }
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+</div>
