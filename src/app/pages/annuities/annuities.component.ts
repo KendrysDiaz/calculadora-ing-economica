@@ -34,7 +34,7 @@ export default class AnnuitiesComponent {
   showModal: boolean = false;
   valorSeleccionado: string = "Vencida";
   valorSeleccionado_2: string = "Vencida"; // Propiedad para almacenar el valor seleccionado
-  resultado: number = 0;
+  resultado: any;
   periodos: { nombre: string; equivalencia: number }[];
   annuities_Form: FormGroup;
   diferida: any = false;
@@ -69,7 +69,7 @@ export default class AnnuitiesComponent {
       num_periodos_gracia: 0,
       tasa_interes_efectiva: 0,
     });
-
+    this.resultado = "";
     this.restablecerSelects();
   }
 
