@@ -1,4 +1,12 @@
-:host {
-  display: block;
+.eliminar-button {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
 }
 
+.eliminar-button:hover {
+    background-color: #cc0000;
+}

@@ -24,9 +24,30 @@
         <hr class="linea" />
         <section class="mb-14">
             <form class="ml-5 mt-3 mr-10">
+                <div class="flex justify-around my-10">
+                    <div>
+                        <input type="radio" name="opciones" id="tir" value="tir" [defaultChecked]="true"
+                            (change)="changeCalculation('tir')" class="mr-2">
+                        <label for="tir" class="font-semibold">T.I.R</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="opciones" id="van" value="van" (change)="changeCalculation('van')"
+                            class="mr-2">
+                        <label for="van" class="font-semibold">V.A.N</label>
+                    </div>
+                </div>
+
+                @if (calculation === "van") {
+                <app-input (valorChange)="onDiscountRateChange($event)" title="Tasa de descuento %" type="number"
+                    info="Tasa de descuento" init={{discountRate}}></app-input>
+
+                }
                 <app-input (valorChange)="onDisbursementChange($event)" title="Desembolso inicial" type="number"
                     info="desembolso" init={{disbursement}}></app-input>
-                <div class="relative overflow-x-auto">
+
+
+
+                <div class="relative overflow-y-auto">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -42,9 +63,10 @@
                                 <th scope="col" class="px-6 py-3">
                                     Flujos de caja
                                 </th>
+                                <td scope="col" class="px-6 py-3"> Acciones </td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="max-h-28 overflow-y-scroll">
                             @for (item of collectionsAndPayments; track $index) {
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"
@@ -61,13 +83,20 @@
                                         info="pago" init={{payment}}></app-input>
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if (!validateNan(calculateClashFlow(collectionsAndPayments[$index].collect,collectionsAndPayments[$index].payment
+                                    @if
+                                    (!validateNan(calculateClashFlow(collectionsAndPayments[$index].collect,collectionsAndPayments[$index].payment
                                     ) )) {
                                     {{calculateClashFlow(collectionsAndPayments[$index].collect,collectionsAndPayments[$index].payment
                                     )}}
                                     }
                                 </td>
+                                <td class="px-6 py-4"> <button type="button" class="eliminar-button col-2 " (click)="deleteYear(item.id)" >
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button> </td>
                                 } @else {
+                                <td class="px-6 py-4">
+
+                                </td>
                                 <td class="px-6 py-4">
 
                                 </td>
@@ -94,16 +123,21 @@
         </section>
         <section id="SectionResult">
             <div class="bg-green-300 mr-6 ml-5 rounded-xl relative pb-4 h-28">
-                <button (click)="calcularTIR()"
+
+                <button (click)="calcular()"
                     class="absolute w-1/3 top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-800 text-white rounded-full p-2">
                     <p class="text-xl font-bold">Calcular</p>
                 </button>
+
                 <section class="flex items-center justify-center">
 
-                    
-                    <h2 class="text-xl text-black font-bold mt-12"> T.I.R : <span >{{tir}}</span> %</h2>
-                    <h2 class="text-xl text-black font-bold mt-4"> V.A.N : <span>{{van}}</span></h2>
-                    
+                    @if (calculation === "tir") {
+                    <h2 class="text-xl text-black font-bold mt-11"> T.I.R : <span>{{tir}}</span> %</h2>
+                    }@else {
+                    <h2 class="text-xl text-black font-bold mt-11"> V.A.N : <span>{{van}}</span> $</h2>
+                    }
+
+
 
                 </section>
             </div>

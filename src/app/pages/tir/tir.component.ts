@@ -27,7 +27,12 @@ export default class TirComponent {
   collect: any;
   payment: any;
   tir: any;
-  van: any;
+  calculation: string = "tir";
+  discountRate : any;
+  van:any;
+  opciones : any = "tir";
+
+
 
 
   validateNan(value:any){
@@ -36,6 +41,10 @@ export default class TirComponent {
 
   onDisbursementChange(value: any) {
     this.disbursement = value;
+  }
+
+  onDiscountRateChange(value:any){
+    this.discountRate = value / 100;
   }
 
   onCollectChange(value: any, index: number) {
@@ -65,32 +74,32 @@ export default class TirComponent {
     }, 0);
   }
 
-    findTIR(cashFlows: any, epsilon = 0.0001, maxIterations = 1000) {
-      
-      let lowerBound = -1; 
-      let upperBound = 1;
-      let iteration = 0;
+  findTIR(cashFlows: any, epsilon = 0.0001, maxIterations = 1000) {
+    
+    let lowerBound = -1; 
+    let upperBound = 1;
+    let iteration = 0;
 
-      while (iteration < maxIterations) {
-        let rate = (lowerBound + upperBound) / 2; 
-        let npvValue = this.calcularValorNeto(rate, cashFlows); 
+    while (iteration < maxIterations) {
+      let rate = (lowerBound + upperBound) / 2; 
+      let npvValue = this.calcularValorNeto(rate, cashFlows); 
 
-        if (Math.abs(npvValue) < epsilon) {
-        
-          return rate;
-        } else if (npvValue > 0) {
-      
-          lowerBound = rate;
-        } else {
-        
-          upperBound = rate;
-        }
-
-        iteration++;
+      if (Math.abs(npvValue) < epsilon) {
+       
+        return rate;
+      } else if (npvValue > 0) {
+     
+        lowerBound = rate;
+      } else {
+       
+        upperBound = rate;
       }
 
-      throw new Error('No se pudo encontrar el TIR dentro de las iteraciones máximas.');
+      iteration++;
     }
+
+    throw new Error('No se pudo encontrar el TIR dentro de las iteraciones máximas.');
+  }
 
   calculateClashFlow(collect: number, payment: number) {
     return collect - payment;
@@ -110,21 +119,65 @@ export default class TirComponent {
 
   }
 
-
-
-
-  calcularTIR() {
+  calcular() {
 
     this.calculateCashFlowsPerPeriod();
-    this.tir = Number(this.findTIR(this.cashFlows).toFixed(4)) * 100;
-    this.van = this.calcularValorNeto(this.tir / 100, this.cashFlows).toFixed(2);
-  }
+    if(this.calculation === "tir"){
+
+      this.tir = Number(this.findTIR(this.cashFlows).toFixed(4)) * 100;
+    }else{
   
+      this.calculateVan();
+    }
+    
+  }
 
   addYear() {
     this.collectionsAndPayments = [...this.collectionsAndPayments, {
-      id: uuid.v4()
+      id: uuid.v4(),
+      payment:0,
+      collect:0
     }]
+  }
+
+  deleteYear(id:any){
+
+    console.log(id)
+
+    console.log(this.collectionsAndPayments);
+
+    let newArray = this.collectionsAndPayments.filter((collectionAndPayment:any) => collectionAndPayment.id != id)
+
+    console.log(this.collectionsAndPayments);
+
+    console.log(newArray);
+
+    this.collectionsAndPayments = [...newArray]
+    
+    
+
+  }
+
+
+  changeCalculation(calculation:string){
+    this.calculation = calculation;
+  }
+
+  findVan(cashFlows:any, discountRate:any){
+    let van = 0;
+
+    // Iterar sobre cada flujo de caja
+    cashFlows.forEach((cashFlow:any, t:any) => {
+      // Descuento del flujo de caja al año t
+      const discountedCashFlow = cashFlow / Math.pow(1 + discountRate, t);
+      van += discountedCashFlow;
+    });
+  
+    return van;
+  }
+
+  calculateVan(){
+    this.van = this.findVan(this.cashFlows, this.discountRate);
   }
 
 
