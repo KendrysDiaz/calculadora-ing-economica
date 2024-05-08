@@ -114,6 +114,7 @@ export default class CompoundInterestComponent {
     }
     calcularInteres() {
       //debugger
+      console.log(this.formGroup?.valid);
       //if (this.formGroup?.valid) {
       if (true) {
         this.interesTotalCalculado = this.interesCompuesto.calularInteresCompuesto(this.formGroup?.value)

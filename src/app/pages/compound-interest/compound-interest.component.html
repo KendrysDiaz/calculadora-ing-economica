@@ -1,120 +1,134 @@
-<div class="card">
-  <div class="card-head">
-      <H2>Interes Compuesto</H2>
-  </div>
-</div>
+<div
+    class="flex max-h-full pt-5 pl-24 pr-6 justify-center items-center h-screen bg-[url('/assets/fondo2.jpg')] bg-cover bg-bottom ">
+    <div class="w-1/2 relative">
+        <!-- Contenedor de información -->
+        <div class="w-full flex flex-col justify-center items-center text-white">
+            <!-- Título -->
+            <h1 class="text-3xl font-bold text-green-900 mb-3">Interes Compuesto</h1>
+            <!-- Imagen explicativa -->
+            <img src="assets/formulas/formula-interes-compuesto.jpg" alt="" srcset="">
+            <!-- Texto -->
+            <p class="text-lg text-black text-justify mx-12">La <span class="font-bold text-custom-green">El interés
+                    compuesto </span> Es aquel que se va sumando al capital inicial y sobre el que se van generando
+                nuevos intereses. El
+                dinero, en este caso, tiene un efecto multiplicador porque los intereses producen nuevos intereses.
+                Sin embargo, en el caso del interés o capitalización simple, los rendimientos siempre se generan
+                sobre el capital original.
 
-<div class="card ">
-  <div class="form-container container">
-    <div class="row-container">
-        <div>      <form [formGroup]="formGroup" class="form col">
-            <button type="button" class="google-button " (click)="agregarPeriodo()" >
-                <i class="fa-solid fa-plus" style="color: #ffffff;"></i>Nuevo periodo</button>
-            <div  formArrayName="periodos" >
-              @for(  periodo of periodos.controls; track periodo; let i=$index){
-                  
-                  <ng-container>
-                      <div class="row mt-3" [formGroupName]="i">
-                          <div class="form-group w-100 row">
-                              <div class="col-7 ">
-                                  <div class="google-combo">
-                                      <select class="combo-select" formControlName="periodo" (change)="actualizarIntervalosDisponibles()">
-                                          <option value="" disabled selected>Seleccione periodo</option>
-                                          @for( intervalo of intervalosTiempo; track intervalo; let j=$index){
-                                              <option [value]="intervalo.value" [disabled]="intervalo.selected">
-                                                  {{ intervalo.label }}
-                                              </option>
-                                          }
-  
-                                      </select>
-                                      @if(campoTieneErrorArray('periodo', i)){
-  
-                                          <label class="form-label error"><i
-                                                  class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i></label>
-                                      }
-                                  </div>
-                              </div>
-                              <div class="col-2 w-100">
-                                  <div class="form-group row">
-                                      <input type="number" class="form-input" placeholder=" " formControlName="valor">
-                                      <label class="form-label">Valor</label>
-                                      @if(campoTieneErrorArray('valor', i) ){
-  
-                                          <label class="form-label error"><i
-                                                  class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i></label>
-                                      }
-                                  </div>
-      
-                              </div>
-                              <button type="button" class="eliminar-button col-2 " (click)="eliminarPeriodo(i)">
-                                  <i class="fa-solid fa-trash"></i>
-                              </button>
-                          </div>
-                      </div>
-                  </ng-container>
-              }
-            </div>
-  
-            <div class="form-group row mt-5">
-                <input type="number" class="form-input" placeholder=" " formControlName="monto">
-                <label class="form-label">Monto Compuesto</label>
-              @if(campoTieneError('monto')){
-                  <label class="form-label error"><i
-                      class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i></label>
-              }
-  
-            </div>
-            <div class="form-group row mt-5">
-                <input type="number" class="form-input" placeholder=" " formControlName="capital">
-                <label class="form-label">Capital</label>
-                @if(campoTieneError('capital') ){
-  
-                    <label class="form-label error"><i
-                            class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i></label>
-                }
-            </div>
-  
-            <div class="form-group row mt-5">
-              
-                <input type="number" class="form-input" placeholder=" " formControlName="tasaInteres">
-                <label class="form-label">Tasa de interes EA</label>
-                @if (campoTieneError('tasaInteres')) {
-  
-                    <label class="form-label error"><i
-                            class="fa-solid fa-circle-exclamation" style="color: #ff0000;"></i></label>
-                }
-            </div>
-            <div class="form-group select-group">
-                <label>capitalizacion</label>
-                <label for="capitalizacion" class="form-label"></label>
-                <select class="combo-select" formControlName="capitalizacion">
-                    <option value="anual">Anual</option>
-                    <option value="semestral">Semestral</option>
-                    <option value="trimestral">Trimestral</option>
-                    <option value="bimestral">Bimestral</option>
-                    <option value="mensual">Mensual</option>
-                    <!-- Agrega otras opciones de capitalización según sea necesario -->
-                </select>
-            </div>
-
-            <button type="button" class="google-button " (click)="calcularInteres()">Calcular</button>
-        </form>
-        @if(interesTotalCalculado !== '' ){
-          <div class="resultado-card">
-              <div class="card">
-                  <div class="card-body">
-                      <h3 class="card-title">Resultado</h3>
-                      <p class="card-text">
-                          {{ interesTotalCalculado }}
-                      </p>
-                  </div>
-              </div>
-          </div>
-        }</div>
+                -El capital inicial va creciendo en cada periodo porque se van sumando los intereses.
+                -La tasa de interés se aplica sobre un capital que va cambiando.
+                -Los intereses aumentan en cada periodo .</p>
+        </div>
     </div>
-    <div class="alerta">si el problema no es capitalizable ponga la capitalizacion en anual, por favor </div>
-</div>
-<div class="imagen">
-    <img src="../../../assets/formulas/interes compuesto.jpg" alt="">
-</div>
+    <div class="w-1/2 rounded-xl m-5 p-5 bg-green-100">
+        <div>
+            <form [formGroup]="formGroup" class="form col">
+                <button type="button" class="google-button " (click)="agregarPeriodo()">
+                    <i class="fa-solid fa-plus" style="color: #ffffff;"></i>Nuevo periodo</button>
+                <div formArrayName="periodos">
+                    @for( periodo of periodos.controls; track periodo; let i=$index){
+
+                    <ng-container>
+                        <div class="row mt-3" [formGroupName]="i">
+                            <div class="form-group w-100 row">
+                                <div class="col-7 ">
+                                    <div class="google-combo">
+                                        <select class="combo-select" formControlName="periodo"
+                                            (change)="actualizarIntervalosDisponibles()">
+                                            <option value="" disabled selected>Seleccione periodo</option>
+                                            @for( intervalo of intervalosTiempo; track intervalo; let j=$index){
+                                            <option [value]="intervalo.value" [disabled]="intervalo.selected">
+                                                {{ intervalo.label }}
+                                            </option>
+                                            }
+
+                                        </select>
+                                        @if(campoTieneErrorArray('periodo', i)){
+
+                                        <label class="form-label error"><i class="fa-solid fa-circle-exclamation"
+                                                style="color: #ff0000;"></i></label>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-2 w-100">
+                                    <div class="form-group row">
+                                        <input type="number" class="form-input" placeholder=" " formControlName="valor">
+                                        <label class="form-label"></label>
+                                        @if(campoTieneErrorArray('valor', i) ){
+
+                                        <label class="form-label error"><i class="fa-solid fa-circle-exclamation"
+                                                style="color: #ff0000;"></i></label>
+                                        }
+                                    </div>
+
+                                </div>
+                                <button type="button" class="eliminar-button col-2 " (click)="eliminarPeriodo(i)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    }
+                </div>
+
+                <div class="form-group row mt-5">
+                    <input type="number" class="form-input" placeholder=" " formControlName="monto">
+                    <label class="form-label">Monto Compuesto</label>
+                    @if(campoTieneError('monto')){
+                    <label class="form-label error"><i class="fa-solid fa-circle-exclamation"
+                            style="color: #ff0000;"></i></label>
+                    }
+
+                </div>
+                <div class="form-group row mt-5">
+                    <input type="number" class="form-input" placeholder=" " formControlName="capital">
+                    <label class="form-label"></label>
+                    @if(campoTieneError('capital') ){
+
+                    <label class="form-label error"><i class="fa-solid fa-circle-exclamation"
+                            style="color: #ff0000;"></i></label>
+                    }
+                </div>
+
+                <div class="form-group row mt-5">
+
+                    <input type="number" class="form-input" placeholder=" " formControlName="tasaInteres">
+                    <label class="form-label">Tasa de interes EA</label>
+                    @if (campoTieneError('tasaInteres')) {
+
+                    <label class="form-label error"><i class="fa-solid fa-circle-exclamation"
+                            style="color: #ff0000;"></i></label>
+                    }
+                </div>
+                <div class="form-group select-group">
+                    <label>capitalizacion</label>
+                    <label for="capitalizacion" class="form-label"></label>
+                    <select class="combo-select" formControlName="capitalizacion">
+                        <option value="anual">Anual</option>
+                        <option value="semestral">Semestral</option>
+                        <option value="trimestral">Trimestral</option>
+                        <option value="bimestral">Bimestral</option>
+                        <option value="mensual">Mensual</option>
+                        <!-- Agrega otras opciones de capitalización según sea necesario -->
+                    </select>
+                </div>
+
+                <button type="button" class="google-button " (click)="calcularInteres()">Calcular</button>
+            </form>
+            @if(interesTotalCalculado !== '' ){
+            <div class="resultado-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Resultado</h3>
+                        <p class="card-text">
+                            {{ interesTotalCalculado }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="alerta">si el problema no es capitalizable ponga la capitalizacion en anual, por favor </div>
+    </div>
+
 </div>
